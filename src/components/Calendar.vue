@@ -32,6 +32,10 @@
     justify-content: center;
     box-shadow: 0 1px 0 0 #E9ECEF;
 
+    &__icon {
+      stroke: #AFB4B8;
+    }
+
     &__btn {
       display: flex;
       justify-content: center;
@@ -43,6 +47,14 @@
       font-size: 0;
       flex-shrink: 0;
       position: relative;
+
+      &:hover {
+        background-color: #f2f3f4;
+
+        & .calendar__icon {
+          stroke: #000;
+        }
+      }
 
       &--next {
         transform: rotate(180deg);
@@ -57,6 +69,11 @@
       font-size: 15px;
       color: #000000;
       font-weight: 700;
+      cursor: pointer;
+
+      &:hover {
+        color: #0070E0;
+      }
     }
   }
 </style>
