@@ -2,16 +2,16 @@
   <section class="chart">
     <timeline></timeline>
     <div class="chart__floor">
-      <div class="chart__heading">
+      <div class="chart__heading chart__heading--shadow">
         <span class="chart__title">7 этаж</span>
       </div>
-      <div class="room">
+      <div class="room room--full">
         <div class="room__inner">
           <span class="room__name">Ржавый Фред</span>
           <span class="room__count">3 – 6 человек</span>
         </div>
         <div class="room__row">
-          <div class="room__cell"></div>
+          <div class="room__cell room__cell--taken"></div>
           <div class="room__cell"></div>
           <div class="room__cell"></div>
           <div class="room__cell"></div>
@@ -107,7 +107,9 @@
       </div>
     </div>
     <div class="chart__floor">
-      <span class="chart__title">6 этаж</span>
+      <div class="chart__heading">
+        <span class="chart__title">6 этаж</span>
+      </div>
       <div class="room">
         <div class="room__inner">
           <span class="room__name">Джокер</span>
@@ -220,17 +222,30 @@
 
     &__heading {
       background: rgba(73,76,83,0.02);
-      box-shadow: 0 -1px 0 0 #E9ECEF;
+      box-shadow: 0 1px 0 0 #E9ECEF;
+
+      &--shadow {
+        box-shadow: 0 -1px 0 0 #E9ECEF,
+                    0 1px 0 0 #E9ECEF;
+      }
     }
 
     &__floor {
       display: table;
+      border-right: 1px solid #E9ECEF;
     }
   }
 
   .room {
     display: flex;
     box-shadow: 0 1px 0 0 #E9ECEF;
+
+    &--full {
+      .room__name,
+      .room__count {
+        color: #858E98;
+      }
+    }
 
     &__inner {
       position: sticky;
@@ -251,9 +266,46 @@
       box-sizing: border-box;
       width: 67px;
       height: 58px;
+      cursor: pointer;
+      position: relative;
+
+      &::before,
+      &::after {
+        display: none;
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 10px;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        background-color: #ffffff;
+      }
+
+      &::after {
+        transform: translateX(-50%) translateY(-50%) rotate(90deg);
+      }
 
       &:hover {
         background-color: #005CFF;
+
+        &::before,
+        &::after {
+          display: block;
+        }
+      }
+
+      &--taken {
+        background-color: #D5DFE9;
+
+        &:hover {
+          background-color: #98A9B9;
+
+          &::before,
+          &::after {
+            display: none;
+          }
+        }
       }
     }
 
