@@ -1,59 +1,65 @@
 <template>
   <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
-    <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <hello></hello>
-    </main>
+    <page-header></page-header>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
+import pageHeader from './components/PageHeader';
 
 export default {
   name: 'app',
   components: {
-    Hello,
+    pageHeader,
   },
 };
 </script>
 
 <style>
-body {
-  margin: 0;
-}
+  body {
+    margin: 0;
+    font-weight: 400;
+    font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
+    color: #000000;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+    -webkit-overflow-scrolling:touch;
+  }
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
-main {
-  text-align: center;
-  margin-top: 40px;
-}
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
-}
+  a {
+    color: #ffffff;
+    text-decoration: none;
+  }
 
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}
+  li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  *:focus {
+    outline: thin dotted
+  }
+
+  button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+  }
 </style>
