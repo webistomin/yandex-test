@@ -33,7 +33,6 @@
     padding: 10px 0;
     padding-left: 223px;
     position: relative;
-    box-shadow: 0 1px 0 0 #E9ECEF;
 
     &__time {
       display: block;
