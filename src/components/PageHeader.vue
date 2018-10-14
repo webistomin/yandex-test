@@ -18,7 +18,8 @@
   @import '../assets/btn';
 
   .page-header{
-    padding: 9px 0 9px 20px;
+    padding: 13px 20px 9px 20px;
+    box-shadow: 0 1px 0 0 #E9ECEF;
 
     &__link {
       display: block;
