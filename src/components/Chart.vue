@@ -286,7 +286,7 @@
     }
 
     &__inner {
-      position: sticky;
+      position: relative;
       left: 0;
       box-sizing: border-box;
       width: 180px;
@@ -298,6 +298,7 @@
       z-index: 1;
 
       &--scrolled {
+        position: sticky;
         padding-top: 0;
       }
     }
