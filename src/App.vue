@@ -2,19 +2,21 @@
   <div id="app">
     <page-header></page-header>
     <chart></chart>
+    <event></event>
   </div>
 </template>
 
 <script>
 import pageHeader from './components/PageHeader';
-
 import Chart from './components/Chart';
+import Event from './components/Event';
 
 export default {
   name: 'app',
   components: {
     pageHeader,
     Chart,
+    Event,
   },
 };
 </script>
