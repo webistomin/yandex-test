@@ -1,13 +1,13 @@
 <template>
   <main class="page-content">
-    <section class="chart">
+    <section class="chart" @scroll="setScrollLeft($event)">
       <timeline></timeline>
       <div class="chart__floor">
         <div class="chart__heading chart__heading--shadow">
           <span class="chart__title">7 этаж</span>
         </div>
         <div class="room room--full">
-          <div class="room__row">
+          <div class="room__row"  >
             <div class="room__cell room__cell--taken"></div>
             <div class="room__cell"></div>
             <div class="room__cell"></div>
@@ -26,9 +26,12 @@
             <div class="room__cell"></div>
             <div class="room__cell"></div>
           </div>
-          <div class="room__inner">
-            <span class="room__name">Ржавый Фред</span>
-            <span class="room__count">3 – 6 человек</span>
+          <div class="room__inner"
+               :class="{'room__inner--scrolled' : isScrolled}">
+            <span class="room__name"
+                  :class="{'room__name--scrolled' : isScrolled}">Ржавый Фред</span>
+            <span class="room__count"
+                  :class="{'room__count--scrolled' : isScrolled}">3 – 6 человек</span>
           </div>
         </div>
         <div class="room">
@@ -51,9 +54,12 @@
             <div class="room__cell"></div>
             <div class="room__cell"></div>
           </div>
-          <div class="room__inner">
-            <span class="room__name">Прачечная</span>
-            <span class="room__count">до 10 человек</span>
+          <div class="room__inner"
+               :class="{'room__inner--scrolled' : isScrolled}">
+            <span class="room__name"
+                  :class="{'room__name--scrolled' : isScrolled}">Прачечная</span>
+            <span class="room__count"
+                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
           </div>
         </div>
         <div class="room">
@@ -76,13 +82,16 @@
             <div class="room__cell"></div>
             <div class="room__cell"></div>
           </div>
-          <div class="room__inner">
-            <span class="room__name">Желтый дом</span>
-            <span class="room__count">до 10 человек</span>
+          <div class="room__inner"
+               :class="{'room__inner--scrolled' : isScrolled}">
+            <span class="room__name"
+                  :class="{'room__name--scrolled' : isScrolled}">Желтый дом</span>
+            <span class="room__count"
+                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
           </div>
         </div>
         <div class="room">
-          <div class="room__row">
+          <div class="room__row"  >
             <div class="room__cell"></div>
             <div class="room__cell"></div>
             <div class="room__cell"></div>
@@ -101,9 +110,12 @@
             <div class="room__cell"></div>
             <div class="room__cell"></div>
           </div>
-          <div class="room__inner">
-            <span class="room__name">Оранжевый тюльпан</span>
-            <span class="room__count">3 – 6 человек</span>
+          <div class="room__inner"
+               :class="{'room__inner--scrolled' : isScrolled}">
+            <span class="room__name"
+                  :class="{'room__name--scrolled' : isScrolled}">Оранжевый тюльпан</span>
+            <span class="room__count"
+                  :class="{'room__count--scrolled' : isScrolled}">3 – 6 человек</span>
           </div>
         </div>
       </div>
@@ -112,7 +124,7 @@
           <span class="chart__title">6 этаж</span>
         </div>
         <div class="room">
-          <div class="room__row">
+          <div class="room__row"  >
             <div class="room__cell"></div>
             <div class="room__cell"></div>
             <div class="room__cell"></div>
@@ -131,38 +143,16 @@
             <div class="room__cell"></div>
             <div class="room__cell"></div>
           </div>
-          <div class="room__inner">
-            <span class="room__name">Джокер</span>
-            <span class="room__count">3 – 6 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner">
-            <span class="room__name">Мариванна</span>
-            <span class="room__count">до 10 человек</span>
+          <div class="room__inner"
+               :class="{'room__inner--scrolled' : isScrolled}">
+            <span class="room__name"
+                  :class="{'room__name--scrolled' : isScrolled}">Джокер</span>
+            <span class="room__count"
+                  :class="{'room__count--scrolled' : isScrolled}">3 – 6 человек</span>
           </div>
         </div>
         <div class="room">
-          <div class="room__row">
+          <div class="room__row"  >
             <div class="room__cell"></div>
             <div class="room__cell"></div>
             <div class="room__cell"></div>
@@ -181,9 +171,40 @@
             <div class="room__cell"></div>
             <div class="room__cell"></div>
           </div>
-          <div class="room__inner">
-            <span class="room__name">Тонкий Боб</span>
-            <span class="room__count">до 10 человек</span>
+          <div class="room__inner"
+               :class="{'room__inner--scrolled' : isScrolled}">
+            <span class="room__name"
+                  :class="{'room__name--scrolled' : isScrolled}">Мариванна</span>
+            <span class="room__count"
+                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
+          </div>
+        </div>
+        <div class="room">
+          <div class="room__row"  >
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+          </div>
+          <div class="room__inner"
+               :class="{'room__inner--scrolled' : isScrolled}">
+            <span class="room__name"
+                  :class="{'room__name--scrolled' : isScrolled}">Тонкий Боб</span>
+            <span class="room__count"
+                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
           </div>
         </div>
       </div>
@@ -196,6 +217,16 @@
 
   export default {
     name: 'Chart',
+    data() {
+      return {
+        isScrolled: false,
+      };
+    },
+    methods: {
+      setScrollLeft(e) {
+        this.isScrolled = e.target.scrollLeft >= 250;
+      },
+    },
     components: {
       Timeline,
     },
@@ -263,7 +294,12 @@
       padding: 12px 16px 12px 16px;
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       z-index: 1;
+
+      &--scrolled {
+        padding-top: 0;
+      }
     }
 
     &__row {
@@ -286,6 +322,7 @@
       height: 58px;
       cursor: pointer;
       position: relative;
+      z-index: 5;
 
       &::before,
       &::after {
@@ -334,14 +371,26 @@
       color: #000000;
       text-overflow: ellipsis;
       white-space: nowrap;
-      overflow: hidden
+      overflow: hidden;
+
+      &--scrolled {
+        background-color: #ffffff;
+        padding: 5px 8px 6px 8px;
+        border-radius: 4px;
+        box-shadow: 0 1px 8px 0;
+        font-size: 11px;
+      }
     }
 
     &__count {
       font-size: 13px;
       text-overflow: ellipsis;
       white-space: nowrap;
-      overflow: hidden
+      overflow: hidden;
+
+      &--scrolled {
+      display: none;
+    }
     }
   }
 </style>

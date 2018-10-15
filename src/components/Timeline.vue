@@ -2,21 +2,21 @@
   <section class="timeline">
     <time class="timeline__time timeline__current">8:05</time>
     <time class="timeline__time timeline__time--past">8:00</time>
-    <time class="timeline__time">9</time>
-    <time class="timeline__time">10</time>
-    <time class="timeline__time">11</time>
-    <time class="timeline__time">12</time>
-    <time class="timeline__time">13</time>
-    <time class="timeline__time">14</time>
-    <time class="timeline__time">15</time>
-    <time class="timeline__time">16</time>
-    <time class="timeline__time">17</time>
-    <time class="timeline__time">18</time>
-    <time class="timeline__time">19</time>
-    <time class="timeline__time">20</time>
-    <time class="timeline__time">21</time>
-    <time class="timeline__time">22</time>
-    <time class="timeline__time">23</time>
+    <time class="timeline__time">9:00</time>
+    <time class="timeline__time">10:00</time>
+    <time class="timeline__time">11:00</time>
+    <time class="timeline__time">12:00</time>
+    <time class="timeline__time">13:00</time>
+    <time class="timeline__time">14:00</time>
+    <time class="timeline__time">15:00</time>
+    <time class="timeline__time">16:00</time>
+    <time class="timeline__time">17:00</time>
+    <time class="timeline__time">18:00</time>
+    <time class="timeline__time">19:00</time>
+    <time class="timeline__time">20:00</time>
+    <time class="timeline__time">21:00</time>
+    <time class="timeline__time">22:00</time>
+    <time class="timeline__time">23:00</time>
   </section>
 </template>
 
