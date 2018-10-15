@@ -48,7 +48,8 @@
       flex-shrink: 0;
       position: relative;
 
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: #f2f3f4;
 
         & .calendar__icon {
@@ -62,7 +63,7 @@
     }
 
     &__date {
-      width: 160px;
+      max-width: 160px;
       margin: 0 52px;
       text-align: center;
       font-family: HelveticaNeue, Helvetica, Arial, sans-serif;

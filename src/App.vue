@@ -1,14 +1,12 @@
 <template>
   <div id="app">
     <page-header></page-header>
-    <calendar></calendar>
     <chart></chart>
   </div>
 </template>
 
 <script>
 import pageHeader from './components/PageHeader';
-import Calendar from './components/Calendar';
 
 import Chart from './components/Chart';
 
@@ -16,7 +14,6 @@ export default {
   name: 'app',
   components: {
     pageHeader,
-    Calendar,
     Chart,
   },
 };

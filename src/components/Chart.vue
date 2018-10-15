@@ -1,192 +1,194 @@
 <template>
-  <section class="chart">
-    <timeline></timeline>
-    <div class="chart__floor">
-      <div class="chart__heading chart__heading--shadow">
-        <span class="chart__title">7 этаж</span>
-      </div>
-      <div class="room room--full">
-        <div class="room__row">
-          <div class="room__cell room__cell--taken"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
+  <main class="page-content">
+    <section class="chart">
+      <timeline></timeline>
+      <div class="chart__floor">
+        <div class="chart__heading chart__heading--shadow">
+          <span class="chart__title">7 этаж</span>
         </div>
-        <div class="room__inner">
-          <span class="room__name">Ржавый Фред</span>
-          <span class="room__count">3 – 6 человек</span>
+        <div class="room room--full">
+          <div class="room__row">
+            <div class="room__cell room__cell--taken"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+          </div>
+          <div class="room__inner">
+            <span class="room__name">Ржавый Фред</span>
+            <span class="room__count">3 – 6 человек</span>
+          </div>
         </div>
-      </div>
-      <div class="room">
-        <div class="room__row">
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
+        <div class="room">
+          <div class="room__row">
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+          </div>
+          <div class="room__inner">
+            <span class="room__name">Прачечная</span>
+            <span class="room__count">до 10 человек</span>
+          </div>
         </div>
-        <div class="room__inner">
-          <span class="room__name">Прачечная</span>
-          <span class="room__count">до 10 человек</span>
+        <div class="room">
+          <div class="room__row">
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+          </div>
+          <div class="room__inner">
+            <span class="room__name">Желтый дом</span>
+            <span class="room__count">до 10 человек</span>
+          </div>
         </div>
-      </div>
-      <div class="room">
-        <div class="room__row">
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-        </div>
-        <div class="room__inner">
-          <span class="room__name">Желтый дом</span>
-          <span class="room__count">до 10 человек</span>
-        </div>
-      </div>
-      <div class="room">
-        <div class="room__row">
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-        </div>
-        <div class="room__inner">
-          <span class="room__name">Оранжевый тюльпан</span>
-          <span class="room__count">3 – 6 человек</span>
-        </div>
-      </div>
-    </div>
-    <div class="chart__floor">
-      <div class="chart__heading">
-        <span class="chart__title">6 этаж</span>
-      </div>
-      <div class="room">
-        <div class="room__row">
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-        </div>
-        <div class="room__inner">
-          <span class="room__name">Джокер</span>
-          <span class="room__count">3 – 6 человек</span>
+        <div class="room">
+          <div class="room__row">
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+          </div>
+          <div class="room__inner">
+            <span class="room__name">Оранжевый тюльпан</span>
+            <span class="room__count">3 – 6 человек</span>
+          </div>
         </div>
       </div>
-      <div class="room">
-        <div class="room__row">
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
+      <div class="chart__floor">
+        <div class="chart__heading">
+          <span class="chart__title">6 этаж</span>
         </div>
-        <div class="room__inner">
-          <span class="room__name">Мариванна</span>
-          <span class="room__count">до 10 человек</span>
+        <div class="room">
+          <div class="room__row">
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+          </div>
+          <div class="room__inner">
+            <span class="room__name">Джокер</span>
+            <span class="room__count">3 – 6 человек</span>
+          </div>
+        </div>
+        <div class="room">
+          <div class="room__row">
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+          </div>
+          <div class="room__inner">
+            <span class="room__name">Мариванна</span>
+            <span class="room__count">до 10 человек</span>
+          </div>
+        </div>
+        <div class="room">
+          <div class="room__row">
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+            <div class="room__cell"></div>
+          </div>
+          <div class="room__inner">
+            <span class="room__name">Тонкий Боб</span>
+            <span class="room__count">до 10 человек</span>
+          </div>
         </div>
       </div>
-      <div class="room">
-        <div class="room__row">
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-          <div class="room__cell"></div>
-        </div>
-        <div class="room__inner">
-          <span class="room__name">Тонкий Боб</span>
-          <span class="room__count">до 10 человек</span>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </template>
 
 <script>
@@ -201,6 +203,10 @@
 </script>
 
 <style lang="less">
+  .page-content {
+    padding-top: 104px;
+  }
+
   .chart {
     overflow-x: scroll;
     overflow-y: hidden;
