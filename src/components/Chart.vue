@@ -4,7 +4,9 @@
       <timeline></timeline>
       <div class="chart__floor">
         <div class="chart__heading chart__heading--shadow">
-          <span class="chart__title">7 этаж</span>
+          <div class="chart__block">
+            <span class="chart__title">7 этаж</span>
+          </div>
         </div>
         <div class="room room--full">
           <div class="room__row"  >
@@ -121,7 +123,9 @@
       </div>
       <div class="chart__floor">
         <div class="chart__heading">
-          <span class="chart__title">6 этаж</span>
+          <div class="chart__block">
+            <span class="chart__title">6 этаж</span>
+          </div>
         </div>
         <div class="room">
           <div class="room__row"  >
@@ -236,6 +240,11 @@
 <style lang="less">
   .page-content {
     padding-top: 104px;
+
+    @media (min-width: 992px) {
+      padding-top: 0;
+      margin-top: -44px;
+    }
   }
 
   .chart {
@@ -270,6 +279,27 @@
     &__floor {
       display: table;
       border-right: 1px solid #E9ECEF;
+    }
+
+    @media (min-width: 992px) {
+      &__title {
+        padding: 21px 0 8px 25px;
+      }
+
+      &__heading {
+        background-color: #F6F7F9;
+        box-shadow: none;
+
+        &--shadow {
+          box-shadow: 0 -1px 0 0 #E9ECEF;
+        }
+      }
+
+      &__block {
+        width: 245px;
+        background-color: #ffffff;
+        box-shadow: 1px 0 0 0 #E9ECEF;
+      }
     }
   }
 
@@ -392,6 +422,33 @@
       &--scrolled {
       display: none;
     }
+    }
+
+    @media (min-width: 992px) {
+      box-shadow: none;
+
+      &__inner {
+        width: 245px;
+        padding: 5px 25px 5px 25px;
+        box-shadow: 1px 0 0 0 #E9ECEF;
+      }
+
+      &__cell {
+        width: 57px;
+        height: 28px;
+        background-color: #ffffff;
+        z-index: 0;
+      }
+
+      &__row {
+        display: flex;
+        align-items: center;
+        background-color: #F6F7F9;
+      }
+
+      &__name {
+        margin-bottom: 2px;
+      }
     }
   }
 </style>

@@ -45,5 +45,22 @@
         display: none;
       }
     }
+
+    @media (min-width: 992px) {
+      position: initial;
+
+      &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 25px 24px 21px 24px;
+      }
+
+      &__btn {
+        &--hidden {
+          display: block;
+        }
+      }
+    }
   }
 </style>

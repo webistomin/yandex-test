@@ -1,6 +1,5 @@
 <template>
   <section class="timeline">
-    <time class="timeline__time timeline__current">8:05</time>
     <time class="timeline__time timeline__time--past">8:00</time>
     <time class="timeline__time">9:00</time>
     <time class="timeline__time">10:00</time>
@@ -82,6 +81,18 @@
         transform: translateX(-50%);
         height: 100vh;
         background-color: #007DFF;
+      }
+    }
+
+    @media (min-width: 992px) {
+      padding: 17px 0 16px 0;
+      padding-left: 254px;
+
+      &__time {
+        &::before {
+          top: 28px;
+          z-index: 6;
+        }
       }
     }
   }

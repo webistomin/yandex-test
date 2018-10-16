@@ -76,5 +76,25 @@
         color: #0070E0;
       }
     }
+
+    @media (min-width: 992px) {
+      margin-top: 1px;
+      box-sizing: border-box;
+      width: 245px;
+      padding: 10px 24px 11px 24px;
+      box-shadow: 0 -1px 0 0 #e9ecef;
+      z-index: 2;
+      background-color: #ffffff;
+      position: relative;
+
+      &__btn {
+        width: 24px;
+        height: 24px;
+      }
+
+      &__date {
+        margin: 0 13px;
+      }
+    }
   }
 </style>
