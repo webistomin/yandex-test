@@ -41,8 +41,25 @@
     }
 
     &__btn {
+      cursor: pointer;
+
+      &:hover {
+        background-color: #005CFF;
+      }
+
+      &:active {
+        background-color: #1D00FE;
+      }
+
       &--hidden {
         display: none;
+      }
+
+      &--disabled {
+        background-color: #E9ECEF;
+        color: rgba(0, 0, 0, 0.2);
+        cursor: not-allowed;
+        pointer-events: none;
       }
     }
 

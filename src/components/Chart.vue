@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="room room--full">
-          <div class="room__row"  >
+          <div class="room__row">
             <div class="room__cell room__cell--taken"></div>
             <div class="room__cell"></div>
             <div class="room__cell"></div>
@@ -93,7 +93,7 @@
           </div>
         </div>
         <div class="room">
-          <div class="room__row"  >
+          <div class="room__row">
             <div class="room__cell"></div>
             <div class="room__cell"></div>
             <div class="room__cell"></div>
@@ -128,7 +128,7 @@
           </div>
         </div>
         <div class="room">
-          <div class="room__row"  >
+          <div class="room__row">
             <div class="room__cell"></div>
             <div class="room__cell"></div>
             <div class="room__cell"></div>
@@ -156,7 +156,7 @@
           </div>
         </div>
         <div class="room">
-          <div class="room__row"  >
+          <div class="room__row">
             <div class="room__cell"></div>
             <div class="room__cell"></div>
             <div class="room__cell"></div>
@@ -184,7 +184,7 @@
           </div>
         </div>
         <div class="room">
-          <div class="room__row"  >
+          <div class="room__row">
             <div class="room__cell"></div>
             <div class="room__cell"></div>
             <div class="room__cell"></div>
@@ -251,6 +251,23 @@
     overflow-x: scroll;
     overflow-y: hidden;
 
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #e9ecef;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar {
+      height: 8px;
+      width: 10px;
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #1d54fe;
+    }
+
     &__title {
       display: inline-block;
       padding-top: 16px;
@@ -260,30 +277,30 @@
       font-weight: 700;
       font-size: 11px;
       letter-spacing: 0.4px;
-      color: #858E98;
+      color: #858e98;
       text-transform: uppercase;
       position: sticky;
       left: 0;
     }
 
     &__heading {
-      background: rgba(73,76,83,0.02);
-      box-shadow: 0 1px 0 0 #E9ECEF;
+      background: rgba(73, 76, 83, 0.02);
+      box-shadow: 0 1px 0 0 #e9ecef;
 
       &--shadow {
-        box-shadow: 0 -1px 0 0 #E9ECEF,
-                    0 1px 0 0 #E9ECEF;
+        box-shadow: 0 -1px 0 0 #e9ecef,
+        0 1px 0 0 #e9ecef;
       }
     }
 
     &__floor {
       display: table;
-      border-right: 1px solid #E9ECEF;
+      border-right: 1px solid #e9ecef;
     }
 
     @media (min-width: 1366px) {
       height: calc(100vh - 63px);
-      background-color: #F6F7F9;
+      background-color: #f6f7f9;
       position: relative;
 
       &::before {
@@ -295,7 +312,7 @@
         width: 245px;
         height: 100%;
         z-index: 1;
-        box-shadow: 1px 0 0 0 #E9ECEF;
+        box-shadow: 1px 0 0 0 #e9ecef;
       }
 
       &__title {
@@ -309,7 +326,7 @@
         position: relative;
 
         &--shadow {
-          box-shadow: 0 -1px 0 0 #E9ECEF;
+          box-shadow: 0 -1px 0 0 #e9ecef;
         }
       }
 
@@ -318,7 +335,7 @@
         position: sticky;
         left: 0;
         background-color: #ffffff;
-        box-shadow: 1px 0 0 0 #E9ECEF;
+        box-shadow: 1px 0 0 0 #e9ecef;
       }
     }
   }
@@ -326,12 +343,12 @@
   .room {
     display: flex;
     flex-direction: row-reverse;
-    box-shadow: 0 1px 0 0 #E9ECEF;
+    box-shadow: 0 1px 0 0 #e9ecef;
 
     &--full {
       .room__name,
       .room__count {
-        color: #858E98;
+        color: #858e98;
       }
     }
 
@@ -358,11 +375,11 @@
 
       &:hover {
         & + .room__inner .room__name {
-          color: #005CFF;
+          color: #005cff;
         }
 
         & + .room__inner .room__count {
-          color: #005CFF;
+          color: #005cff;
         }
       }
     }
@@ -393,7 +410,7 @@
       }
 
       &:hover {
-        background-color: #005CFF;
+        background-color: #005cff;
 
         &::before,
         &::after {
@@ -401,16 +418,24 @@
         }
       }
 
+      &:active {
+        background-color: #1d00fe;
+      }
+
       &--taken {
-        background-color: #D5DFE9;
+        background-color: #d5dfe9;
 
         &:hover {
-          background-color: #98A9B9;
+          background-color: #98a9b9;
 
           &::before,
           &::after {
             display: none;
           }
+        }
+
+        &:active {
+          background-color: #98a1b9;
         }
       }
     }
@@ -440,8 +465,8 @@
       overflow: hidden;
 
       &--scrolled {
-      display: none;
-    }
+        display: none;
+      }
     }
 
     @media (min-width: 1366px) {
@@ -450,7 +475,7 @@
       &__inner {
         width: 245px;
         padding: 5px 25px 5px 25px;
-        box-shadow: 1px 0 0 0 #E9ECEF;
+        box-shadow: 1px 0 0 0 #e9ecef;
         margin-left: -1px;
         position: sticky;
         left: 0;
@@ -467,7 +492,7 @@
       &__row {
         display: flex;
         align-items: center;
-        background-color: #F6F7F9;
+        background-color: #f6f7f9;
       }
 
       &__name {
