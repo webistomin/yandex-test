@@ -77,7 +77,7 @@
       }
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: 1366px) {
       margin-top: 1px;
       box-sizing: border-box;
       width: 245px;

@@ -1,5 +1,6 @@
 <template>
   <section class="timeline">
+    <time class="timeline__time timeline__current">8:05</time>
     <time class="timeline__time timeline__time--past">8:00</time>
     <time class="timeline__time">9:00</time>
     <time class="timeline__time">10:00</time>
@@ -84,14 +85,21 @@
       }
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: 1366px) {
       padding: 17px 0 16px 0;
-      padding-left: 254px;
+      padding-left: 289px;
+      background-color: #ffffff;
 
       &__time {
         &::before {
           top: 28px;
           z-index: 6;
+        }
+      }
+
+      &__current {
+        &::before {
+          top: 20px;
         }
       }
     }

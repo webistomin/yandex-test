@@ -46,14 +46,14 @@
       }
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: 1366px) {
       position: initial;
 
       &__inner {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 25px 24px 21px 24px;
+        padding: 15px 24px 11px 24px;
       }
 
       &__btn {

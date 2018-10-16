@@ -241,7 +241,7 @@
   .page-content {
     padding-top: 104px;
 
-    @media (min-width: 992px) {
+    @media (min-width: 1366px) {
       padding-top: 0;
       margin-top: -44px;
     }
@@ -281,14 +281,32 @@
       border-right: 1px solid #E9ECEF;
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: 1366px) {
+      height: calc(100vh - 63px);
+      background-color: #F6F7F9;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: fixed;
+        top: 110px;
+        left: 0;
+        background-color: #ffffff;
+        width: 245px;
+        height: 100%;
+        z-index: 1;
+        box-shadow: 1px 0 0 0 #E9ECEF;
+      }
+
       &__title {
         padding: 21px 0 8px 25px;
       }
 
       &__heading {
-        background-color: #F6F7F9;
+        background-color: transparent;
         box-shadow: none;
+        z-index: 1;
+        position: relative;
 
         &--shadow {
           box-shadow: 0 -1px 0 0 #E9ECEF;
@@ -297,6 +315,8 @@
 
       &__block {
         width: 245px;
+        position: sticky;
+        left: 0;
         background-color: #ffffff;
         box-shadow: 1px 0 0 0 #E9ECEF;
       }
@@ -424,17 +444,21 @@
     }
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: 1366px) {
       box-shadow: none;
 
       &__inner {
         width: 245px;
         padding: 5px 25px 5px 25px;
         box-shadow: 1px 0 0 0 #E9ECEF;
+        margin-left: -1px;
+        position: sticky;
+        left: 0;
+        background-color: #ffffff;
       }
 
       &__cell {
-        width: 57px;
+        width: 67.2px;
         height: 28px;
         background-color: #ffffff;
         z-index: 0;

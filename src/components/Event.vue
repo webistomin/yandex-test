@@ -38,6 +38,7 @@
 
 <style lang="less">
   .event {
+    display: none;
     padding: 20px 16px;
     max-width: 360px;
     position: relative;
