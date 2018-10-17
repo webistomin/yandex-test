@@ -1,6 +1,7 @@
 <template>
   <section class="timeline">
-    <time class="timeline__time timeline__current">{{getCurrentTime}}</time>
+    <time class="timeline__time timeline__current"
+          :style="{'left': getLeftPosition}">{{getCurrentTime}}</time>
     <time class="timeline__time timeline__time--past">8:00</time>
     <time class="timeline__time">9:00</time>
     <time class="timeline__time">10:00</time>
@@ -32,6 +33,16 @@
           return `${hour}:0${minutes}`;
         }
         return `${hour}:${minutes}`;
+      },
+      getLeftPosition() {
+        const now = this.$store.getters.getCurrentTime;
+        const minutes = now.getMinutes();
+        const hour = now.getHours();
+        const totalHours = ((hour - 7) + (minutes / 60)).toFixed(1);
+        if (hour > 23 || hour < 7) {
+          return '1340px';
+        }
+        return `${220 + (totalHours * 67.2)}px`;
       },
     },
   };
