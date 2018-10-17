@@ -78,6 +78,7 @@
 
 <style lang="less">
   .event-form {
+    display: none;
     position: fixed;
     top: 48px;
     width: 100%;
@@ -209,6 +210,19 @@
       font-size: 15px;
       font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
       color: #000000;
+
+      &:hover {
+        background-color: #007DFF;
+        color: #ffffff;
+
+        .event-form__name {
+          color: #ffffff;
+        }
+
+        .event-form__duration {
+          color: #ffffff;
+        }
+      }
     }
 
     &__duration {

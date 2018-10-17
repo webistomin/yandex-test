@@ -4,6 +4,7 @@
     <chart></chart>
     <event></event>
     <new-event></new-event>
+    <event-created></event-created>
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import pageHeader from './components/PageHeader';
 import Chart from './components/Chart';
 import Event from './components/Event';
 import NewEvent from './components/NewEvent';
+import EventCreated from './components/EventCreated';
 
 export default {
   name: 'app',
@@ -20,6 +22,7 @@ export default {
     Chart,
     Event,
     NewEvent,
+    EventCreated,
   },
 };
 </script>
