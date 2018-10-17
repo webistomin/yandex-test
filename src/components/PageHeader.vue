@@ -5,7 +5,7 @@
         <img class="page-header__logo" src="../../static/img/logo.svg"
              alt="Yandex Переговорки" width="175" height="26">
       </a>
-      <button class="page-header__btn page-header__btn--hidden btn">Создать встречу</button>
+      <button class="page-header__btn page-header__btn--hidden btn" type="button">Создать встречу</button>
     </div>
     <calendar></calendar>
   </header>
@@ -42,14 +42,6 @@
 
     &__btn {
       cursor: pointer;
-
-      &:hover {
-        background-color: #005CFF;
-      }
-
-      &:active {
-        background-color: #1D00FE;
-      }
 
       &--hidden {
         display: none;
