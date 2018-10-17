@@ -7,12 +7,18 @@
       </a>
       <button class="page-header__btn page-header__btn--hidden btn">Создать встречу</button>
     </div>
+    <calendar></calendar>
   </header>
 </template>
 
 <script>
+  import Calendar from './Calendar';
+
   export default {
     name: 'PageHeader',
+    components: {
+      Calendar,
+    },
   };
 </script>
 

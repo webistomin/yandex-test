@@ -26,17 +26,11 @@
 
 <style lang="less">
   .calendar {
-    box-sizing: border-box;
-    width: 100%;
     padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 1px 0 0 #E9ECEF;
-    position: fixed;
-    top: 49px;
-    background-color: #ffffff;
-    z-index: 10;
 
     &__icon {
       stroke: #AFB4B8;

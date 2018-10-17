@@ -89,9 +89,12 @@
       padding: 17px 0 16px 0;
       padding-left: 289px;
       background-color: #ffffff;
+      width: 1387px;
+      box-sizing: border-box;
 
       &__time {
         &::before {
+          height: calc(100vh - 116px);
           top: 28px;
           z-index: 6;
         }
@@ -99,6 +102,7 @@
 
       &__current {
         &::before {
+          height: calc(100vh - 104px);
           top: 20px;
         }
       }
