@@ -1,215 +1,30 @@
 <template>
   <main class="page-content">
+    <aside class="aside">
+      <calendar></calendar>
+      <rooms></rooms>
+    </aside>
     <section class="chart" @scroll="setScrollLeft($event)">
       <timeline></timeline>
-      <div class="chart__floor">
-        <div class="chart__heading chart__heading--shadow">
-          <div class="chart__block">
-            <span class="chart__title">7 этаж</span>
-          </div>
-        </div>
-        <div class="room room--full">
-          <div class="room__row">
-            <div class="room__cell room__cell--taken"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Ржавый Фред</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">3 – 6 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Прачечная</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Желтый дом</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Оранжевый тюльпан</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">3 – 6 человек</span>
-          </div>
-        </div>
-      </div>
-      <div class="chart__floor">
-        <div class="chart__heading">
-          <div class="chart__block">
-            <span class="chart__title">6 этаж</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Джокер</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">3 – 6 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Мариванна</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Тонкий Боб</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
-          </div>
+      <div class="chart__block">
+        <div class="room__column">
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
+          <div class="chart__cell"></div>
         </div>
       </div>
     </section>
@@ -218,6 +33,8 @@
 
 <script>
   import Timeline from './Timeline';
+  import Calendar from './Calendar';
+  import Rooms from './Rooms';
 
   export default {
     name: 'Chart',
@@ -233,13 +50,15 @@
     },
     components: {
       Timeline,
+      Calendar,
+      Rooms,
     },
   };
 </script>
 
 <style lang="less">
   .page-content {
-    padding-top: 104px;
+    padding-top: 108px;
 
     @media (min-width: 1366px) {
       padding-top: 0;
@@ -302,18 +121,6 @@
       height: calc(100vh - 63px);
       background-color: #f6f7f9;
       position: relative;
-
-      &::before {
-        content: "";
-        position: fixed;
-        top: 110px;
-        left: 0;
-        background-color: #ffffff;
-        width: 245px;
-        height: 100%;
-        z-index: 1;
-        box-shadow: 1px 0 0 0 #e9ecef;
-      }
 
       &__title {
         padding: 21px 0 8px 25px;
@@ -487,6 +294,11 @@
         height: 28px;
         background-color: #ffffff;
         z-index: 0;
+        position: relative;
+
+        &--taken {
+          background-color: #d5dfe9;
+        }
       }
 
       &__row {
