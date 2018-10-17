@@ -1,16 +1,18 @@
 <template>
   <section class="event-form">
-    <span class="event-form__title">
-      Новая встреча
-    </span>
     <form action="#" class="event-form__form">
-      <div class="event-form__block">
+      <span class="event-form__title">
+      Новая встреча
+      </span>
+      <div class="event-form__block event-form__block--mr">
         <label for="theme" class="event-form__label">Тема</label>
         <input type="text" class="event-form__input" id="theme" placeholder="О чем будете говорить?">
       </div>
-      <div class="event-form__block event-form__block--mb">
-        <label for="date" class="event-form__label">Дата и время</label>
-        <input type="date" class="event-form__input" id="date" placeholder="Дата встречи">
+      <div class="event-form__block event-form__block--mb event-form__block--flex">
+        <div class="event-form__wrapper">
+          <label for="date" class="event-form__label">Дата и время</label>
+          <input type="date" class="event-form__input" id="date" placeholder="Дата встречи">
+        </div>
         <div class="event-form__inner">
           <label for="start" class="event-form__label event-form__label--hidden">Начало</label>
           <input type="time" class="event-form__input" id="start" placeholder="Начало встречи">
@@ -19,7 +21,7 @@
           <input type="time" class="event-form__input" id="end" placeholder="Конец встречи">
         </div>
       </div>
-      <div class="event-form__block event-form__block--mb">
+      <div class="event-form__block event-form__block--mb event-form__block--mr">
         <label for="members" class="event-form__label">Участники</label>
         <input type="text" class="event-form__input" id="members" placeholder="Например, Тор Одинович">
         <ul class="event-form__list">
@@ -88,8 +90,7 @@
     overflow: auto;
     padding-bottom: 216px;
 
-    &::before,
-    &::after {
+    &::before {
       content: "";
       position: absolute;
       top: 304px;
@@ -99,10 +100,6 @@
       background-color: #E9ECEF;
     }
 
-    &::after {
-      top: 456px;
-    }
-
     &__title {
       display: block;
       font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
@@ -110,6 +107,7 @@
       font-size: 20px;
       color: #000000;
       margin-bottom: 16px;
+      width: 100%;
     }
 
     &__block {
@@ -236,6 +234,77 @@
       width: 100%;
       max-width: 238px;
       margin-bottom: 8px;
+    }
+
+    @media (min-width: 768px) {
+      &::before,
+      &::after {
+        display: none;
+      }
+      padding-bottom: 50px;
+
+      &__title {
+        text-align: center;
+      }
+
+      &__form {
+        box-sizing: border-box;
+        max-width: 880px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      &__block {
+        min-width: 352px;
+        max-width: 100%;
+
+        &--mr {
+          margin-right: 32px;
+        }
+      }
+
+      &__actions {
+        position: relative;
+      }
+    }
+
+    @media (min-width: 1366px) {
+      top: 62px;
+
+      &__form {
+        width: 880px;
+        margin: 0 auto;
+      }
+
+      &__input {
+        padding: 11px 10px;
+        height: 38px;
+      }
+
+      &__title {
+        text-align: left;
+      }
+
+      &__block {
+        width: 420px;
+
+        &--flex {
+          max-width: 428px;
+          display: flex;
+          flex-direction: row;
+          align-items: flex-end;
+        }
+      }
+
+      &__wrapper {
+        margin-right: 16px;
+      }
+
+      &__inner {
+        margin-top: 0;
+      }
     }
 
 
