@@ -24,6 +24,9 @@ export default {
     NewEvent,
     EventCreated,
   },
+  mounted() {
+    setInterval(() => { this.$store.commit('setDate', new Date()); }, 1000 * 60);
+  },
 };
 </script>
 

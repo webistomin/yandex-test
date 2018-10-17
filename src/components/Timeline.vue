@@ -1,6 +1,6 @@
 <template>
   <section class="timeline">
-    <time class="timeline__time timeline__current">8:05</time>
+    <time class="timeline__time timeline__current">{{getCurrentTime}}</time>
     <time class="timeline__time timeline__time--past">8:00</time>
     <time class="timeline__time">9:00</time>
     <time class="timeline__time">10:00</time>
@@ -23,6 +23,17 @@
 <script>
   export default {
     name: 'Timeline',
+    computed: {
+      getCurrentTime() {
+        const now = this.$store.getters.getCurrentTime;
+        const minutes = now.getMinutes();
+        const hour = now.getHours();
+        if (minutes < 10) {
+          return `${hour}:0${minutes}`;
+        }
+        return `${hour}:${minutes}`;
+      },
+    },
   };
 </script>
 
@@ -71,7 +82,7 @@
       padding: 4px 0;
       margin: 0;
       color: #ffffff;
-      z-index: 1;
+      z-index: 2;
 
       &::before {
         width: 1px;

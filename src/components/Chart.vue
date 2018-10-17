@@ -489,12 +489,30 @@
         height: 28px;
         background-color: #ffffff;
         z-index: 0;
+
+        &--taken {
+          background-color: #d5dfe9;
+          position: relative;
+        }
       }
 
       &__row {
         display: flex;
         align-items: center;
         background-color: #f6f7f9;
+        position: relative;
+
+        &::before {
+          display: block;
+          content: "";
+          width: 100px;
+          height: 28px;
+          position: absolute;
+          background-color: #d5dfe9;
+          left: 50px;
+          top: 8px;
+          z-index: 1;
+        }
       }
 
       &__name {

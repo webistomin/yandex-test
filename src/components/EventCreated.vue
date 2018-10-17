@@ -29,6 +29,7 @@
 <style lang="less">
   .event-created {
     display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     position: fixed;
