@@ -2,213 +2,35 @@
   <main class="page-content">
     <section class="chart" @scroll="setScrollLeft($event)">
       <timeline></timeline>
-      <div class="chart__floor">
-        <div class="chart__heading chart__heading--shadow">
-          <div class="chart__block">
-            <span class="chart__title">7 этаж</span>
-          </div>
-        </div>
-        <div class="room room--full">
-          <div class="room__row">
-            <div class="room__cell room__cell--taken"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Ржавый Фред</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">3 – 6 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Прачечная</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Желтый дом</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Оранжевый тюльпан</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">3 – 6 человек</span>
-          </div>
-        </div>
-      </div>
-      <div class="chart__floor">
+      <div class="chart__floor"
+           v-for="(room, index) of rooms"
+           :key="room.id">
         <div class="chart__heading">
           <div class="chart__block">
-            <span class="chart__title">6 этаж</span>
+            <span class="chart__title">{{room.floor}} этаж</span>
           </div>
         </div>
-        <div class="room">
+        <div class="room" v-for="roomData of room.roomList">
           <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
+            <div class="room__cell"
+                 :data-time="index+7"
+                 :data-room="roomData.roomName"
+                 :data-floor="room.floor"
+                 v-for="(cell, index) of 17"
+                 :key="index"
+                 @click="openNewEventModal($event)">
+            </div>
           </div>
           <div class="room__inner"
                :class="{'room__inner--scrolled' : isScrolled}">
             <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Джокер</span>
+                  :class="{'room__name--scrolled' : isScrolled}">
+                  {{roomData.roomName}}
+            </span>
             <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">3 – 6 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Мариванна</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
-          </div>
-        </div>
-        <div class="room">
-          <div class="room__row">
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-            <div class="room__cell"></div>
-          </div>
-          <div class="room__inner"
-               :class="{'room__inner--scrolled' : isScrolled}">
-            <span class="room__name"
-                  :class="{'room__name--scrolled' : isScrolled}">Тонкий Боб</span>
-            <span class="room__count"
-                  :class="{'room__count--scrolled' : isScrolled}">до 10 человек</span>
+                  :class="{'room__count--scrolled' : isScrolled}">
+               {{roomData.roomCount}}
+            </span>
           </div>
         </div>
       </div>
@@ -224,11 +46,66 @@
     data() {
       return {
         isScrolled: false,
+        rooms: [
+          {
+            id: 7,
+            floor: 7,
+            roomList: [
+              {
+                roomName: 'Ржавый Фред',
+                roomCount: '3 – 6 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Прачечная',
+                roomCount: 'до 10 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Желтый дом',
+                roomCount: 'до 10 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Оранжевый Тюльпан',
+                roomCount: '3 – 6 человек',
+                isFull: false,
+              },
+            ],
+          },
+          {
+            id: 6,
+            floor: 6,
+            roomList: [
+              {
+                roomName: 'Джокер',
+                roomCount: '3 – 6 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Мариванна',
+                roomCount: 'до 10 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Тонкий Боб',
+                roomCount: 'до 10 человек',
+                isFull: false,
+              },
+            ],
+          },
+        ],
       };
     },
     methods: {
       setScrollLeft(e) {
         this.isScrolled = e.target.scrollLeft >= 250;
+      },
+      openNewEventModal(event) {
+        this.$store.commit('setNewEventModal', true);
+        this.$store.commit('setCurrentRoom', event.target.dataset.room);
+        this.$store.commit('setCurrentTime', event.target.dataset.time);
+        this.$store.commit('setCurrentFloor', event.target.dataset.floor);
       },
     },
     components: {

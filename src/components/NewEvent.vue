@@ -12,14 +12,20 @@
       <div class="event-form__block event-form__block--mb event-form__block--flex">
         <div class="event-form__wrapper">
           <label for="date" class="event-form__label">Дата и время</label>
-          <input type="date" class="event-form__input" id="date" placeholder="Дата встречи">
+          <input type="date" class="event-form__input" id="date"
+                 placeholder="Дата встречи"
+                 :value="getCurrentDate">
         </div>
         <div class="event-form__inner">
           <label for="start" class="event-form__label event-form__label--hidden">Начало</label>
-          <input type="time" class="event-form__input" id="start" placeholder="Начало встречи">
+          <input type="time" class="event-form__input"
+                 id="start" placeholder="Начало встречи"
+                 v-model="startTime">
           <span class="event-form__dash">–</span>
           <label for="end" class="event-form__label event-form__label--hidden">Конец</label>
-          <input type="time" class="event-form__input" id="end" placeholder="Конец встречи">
+          <input type="time" class="event-form__input" id="end"
+                 placeholder="Конец встречи"
+                 v-model="endTime">
         </div>
       </div>
       <div class="event-form__block event-form__block--mb event-form__block--mr">
@@ -39,27 +45,17 @@
         </ul>
       </div>
       <div class="event-form__block">
-        <span class="event-form__label">Рекомендованные переговорки</span>
+        <span class="event-form__label">Выбранная переговорка</span>
         <ul class="event-form__rooms">
           <li class="event-form__room">
             <div class="event-form__duration">
-              <time class="event-form__time">16:00</time>
+              <time class="event-form__time">{{startTime}}</time>
               –
-              <time class="event-form__time">17:00</time>
+              <time class="event-form__time">{{endTime}}</time>
             </div>
-            <span class="event-form__name">Готем</span>
+            <span class="event-form__name">{{getCurrentRoom}}</span>
             &nbsp;•&nbsp;
-            <span class="event-form__floor">4 этаж</span>
-          </li>
-          <li class="event-form__room">
-            <div class="event-form__duration">
-              <time class="event-form__time">16:00</time>
-              –
-              <time class="event-form__time">17:00</time>
-            </div>
-            <span class="event-form__name">Готем</span>
-            &nbsp;•&nbsp;
-            <span class="event-form__floor">4 этаж</span>
+            <span class="event-form__floor">{{getCurrentFloor}} этаж</span>
           </li>
         </ul>
       </div>
@@ -73,11 +69,51 @@
 </template>
 
 <script>
+  import moment from 'moment';
+
   export default {
     name: 'NewEvent',
     computed: {
       isModalOpened() {
         return this.$store.getters.getNewEventModal;
+      },
+      getCurrentRoom() {
+        return this.$store.getters.getCurrentRoom;
+      },
+      getCurrentTime() {
+        return this.$store.getters.getCurrentTime;
+      },
+      getCurrentFloor() {
+        return this.$store.getters.getCurrentFloor;
+      },
+      getCurrentDate() {
+        const now = this.$store.getters.getCurrentDate;
+        return moment(now).format('YYYY-MM-DD');
+      },
+      startTime: {
+        get() {
+          if (this.getCurrentTime < 10) {
+            return `0${+this.getCurrentTime}:00`;
+          }
+          return `${+this.getCurrentTime}:00`;
+        },
+        set(value) {
+          if (value < 10) {
+            this.$store.commit('setCurrentTime', value.slice(0, 1));
+          }
+          this.$store.commit('setCurrentTime', value.slice(0, 2));
+        },
+      },
+      endTime: {
+        get() {
+          if (this.getEndTime < 10) {
+            return `0${+this.getCurrentTime + 1}:00`;
+          }
+          return `${+this.getCurrentTime + 1}:00`;
+        },
+        set(value) {
+          this.$store.commit('setEndTime', value);
+        },
       },
     },
     methods: {

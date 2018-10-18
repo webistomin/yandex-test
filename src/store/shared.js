@@ -12,7 +12,7 @@ export default {
     },
   },
   getters: {
-    getCurrentTime(state) {
+    getCurrentDate(state) {
       return state.now;
     },
     getNewEventModal(state) {

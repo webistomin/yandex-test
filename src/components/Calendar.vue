@@ -53,16 +53,18 @@
         const result = this.now || new Date();
         result.setDate(result.getDate() + 1);
         this.now = new Date(result);
+        this.$store.commit('setDate', this.now);
       },
       removeOneDay() {
         const result = this.now || new Date();
         result.setDate(result.getDate() - 1);
         this.now = new Date(result);
+        this.$store.commit('setDate', this.now);
       },
     },
     computed: {
       getCalendarPlaceholder() {
-        const now = this.$store.getters.getCurrentTime;
+        const now = this.$store.getters.getCurrentDate;
         moment.locale('ru');
         return `${moment(now).format('DD MMM')} • Сегодня`;
       },
@@ -116,6 +118,7 @@
       font-weight: 700;
       margin: 0;
       max-width: 160px;
+      user-select: none;
 
       &:hover,
       &:focus {

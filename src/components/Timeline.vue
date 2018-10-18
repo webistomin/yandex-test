@@ -15,6 +15,7 @@
     name: 'Timeline',
     data() {
       return {
+        now: this.$store.getters.getCurrentDate,
         times: [
           {
             time: 8,
@@ -84,7 +85,7 @@
       };
     },
     mounted() {
-      const now = this.$store.getters.getCurrentTime;
+      const now = this.now;
       const hour = now.getHours();
       Object.entries(this.times).forEach(
         ([key]) => {
@@ -96,7 +97,7 @@
     },
     computed: {
       getCurrentTime() {
-        const now = this.$store.getters.getCurrentTime;
+        const now = this.now;
         const minutes = now.getMinutes();
         const hour = now.getHours();
         if (minutes < 10) {
@@ -105,7 +106,7 @@
         return `${hour}:${minutes}`;
       },
       getTimelineLeftPosition() {
-        const now = this.$store.getters.getCurrentTime;
+        const now = this.now;
         const minutes = now.getMinutes();
         const hour = now.getHours();
         const totalHours = ((hour - 7) + (minutes / 60)).toFixed(1);
