@@ -1,12 +1,14 @@
 <template>
   <section class="calendar">
-    <button class="calendar__btn calendar__btn--previous">Назад
+    <button class="calendar__btn calendar__btn--previous"
+    @click="removeOneDay">Назад
       <svg width="16" height="16" class="calendar__icon">
         <use x="2" y="0" xlink:href="#icon-arrow"></use>
       </svg>
     </button>
     <time class="calendar__date">
       <datepicker :language="language"
+                  v-model="now"
                   :monday-first="true"
                   :placeholder="getCalendarPlaceholder"
                   :input-class="'calendar__datepicker'"
@@ -17,7 +19,8 @@
                   }">
       </datepicker>
     </time>
-    <button class="calendar__btn calendar__btn--next">Вперед
+    <button class="calendar__btn calendar__btn--next"
+            @click="addOneDay">Вперед
       <svg width="16" height="16" class="calendar__icon">
         <use x="2" y="0" xlink:href="#icon-arrow"></use>
       </svg>
@@ -34,7 +37,7 @@
     data() {
       return {
         language: ru,
-        now: new Date(),
+        now: '',
       };
     },
     name: 'Calendar',
@@ -46,10 +49,20 @@
         moment.locale('ru');
         return moment(date).format('DD MMMM');
       },
+      addOneDay() {
+        const result = this.now || new Date();
+        result.setDate(result.getDate() + 1);
+        this.now = new Date(result);
+      },
+      removeOneDay() {
+        const result = this.now || new Date();
+        result.setDate(result.getDate() - 1);
+        this.now = new Date(result);
+      },
     },
     computed: {
       getCalendarPlaceholder() {
-        const now = new Date();
+        const now = this.$store.getters.getCurrentTime;
         moment.locale('ru');
         return `${moment(now).format('DD MMM')} • Сегодня`;
       },
@@ -74,10 +87,21 @@
         background-color: transparent;
       }
 
+      & .cell.selected,
+      & .cell.selected.highlighted {
+        background-color: #0070E0;
+        color: #ffffff;
+
+        &:hover {
+          background-color: #0070E0;
+          color: #ffffff;
+        }
+      }
+
       & .cell {
         &:hover {
-          color: #1d00fe;
-          border: 1px solid #1d00fe !important;
+          color: #0070E0;
+          border: 1px solid #0070E0 !important;
         }
       }
     }
@@ -95,6 +119,7 @@
 
       &:hover,
       &:focus {
+        color: #0070E0;
         &::placeholder {
           color: #0070E0;
         }
@@ -160,6 +185,15 @@
       z-index: 2;
       background-color: #ffffff;
       position: relative;
+
+      &__datepicker {
+        max-width: 130px;
+      }
+
+      &__calendar {
+        left: -35px;
+        top: 32px;
+      }
 
       &__btn {
         width: 24px;

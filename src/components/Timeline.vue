@@ -2,28 +2,98 @@
   <section class="timeline">
     <time class="timeline__time timeline__current"
           :style="{'left': getTimelineLeftPosition}">{{getCurrentTime}}</time>
-    <time class="timeline__time timeline__time--past">8:00</time>
-    <time class="timeline__time">9:00</time>
-    <time class="timeline__time">10:00</time>
-    <time class="timeline__time">11:00</time>
-    <time class="timeline__time">12:00</time>
-    <time class="timeline__time">13:00</time>
-    <time class="timeline__time">14:00</time>
-    <time class="timeline__time">15:00</time>
-    <time class="timeline__time">16:00</time>
-    <time class="timeline__time">17:00</time>
-    <time class="timeline__time">18:00</time>
-    <time class="timeline__time">19:00</time>
-    <time class="timeline__time">20:00</time>
-    <time class="timeline__time">21:00</time>
-    <time class="timeline__time">22:00</time>
-    <time class="timeline__time">23:00</time>
+    <time class="timeline__time"
+          v-for="time of times"
+          :class="{'timeline__time--past': time.isPast}">
+      {{time.time}}:00
+    </time>
   </section>
 </template>
 
 <script>
   export default {
     name: 'Timeline',
+    data() {
+      return {
+        times: [
+          {
+            time: 8,
+            isPast: false,
+          },
+          {
+            time: 9,
+            isPast: false,
+          },
+          {
+            time: 10,
+            isPast: false,
+          },
+          {
+            time: 11,
+            isPast: false,
+          },
+          {
+            time: 12,
+            isPast: false,
+          },
+          {
+            time: 13,
+            isPast: false,
+          },
+          {
+            time: 14,
+            isPast: false,
+          },
+          {
+            time: 15,
+            isPast: false,
+          },
+          {
+            time: 16,
+            isPast: false,
+          },
+          {
+            time: 17,
+            isPast: false,
+          },
+          {
+            time: 18,
+            isPast: false,
+          },
+          {
+            time: 19,
+            isPast: false,
+          },
+          {
+            time: 20,
+            isPast: false,
+          },
+          {
+            time: 21,
+            isPast: false,
+          },
+          {
+            time: 22,
+            isPast: false,
+          },
+          {
+            time: 23,
+            isPast: false,
+          },
+        ],
+      };
+    },
+    mounted() {
+      const now = this.$store.getters.getCurrentTime;
+      const hour = now.getHours();
+      Object.entries(this.times).forEach(
+        ([key]) => {
+          if (this.times[key].time < hour) {
+            this.times[key].isPast = true;
+          }
+        },
+      );
+    },
     computed: {
       getCurrentTime() {
         const now = this.$store.getters.getCurrentTime;
