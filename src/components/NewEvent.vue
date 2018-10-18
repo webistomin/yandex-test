@@ -1,5 +1,6 @@
 <template>
-  <section class="event-form">
+  <section class="event-form"
+           :class="{'event-form--opened' : isModalOpened}">
     <form action="#" class="event-form__form">
       <span class="event-form__title">
       Новая встреча
@@ -63,7 +64,8 @@
         </ul>
       </div>
       <div class="event-form__actions">
-        <button class="event-form__btn btn" type="button">Отмена</button>
+        <button class="event-form__btn btn" type="button"
+                @click="closeNewEventModal">Отмена</button>
         <button class="event-form__btn btn" type="submit">Создать встречу</button>
       </div>
     </form>
@@ -73,6 +75,16 @@
 <script>
   export default {
     name: 'NewEvent',
+    computed: {
+      isModalOpened() {
+        return this.$store.getters.getNewEventModal;
+      },
+    },
+    methods: {
+      closeNewEventModal() {
+        this.$store.commit('setNewEventModal', false);
+      },
+    },
   };
 </script>
 
@@ -90,6 +102,10 @@
     box-sizing: border-box;
     overflow: auto;
     padding-bottom: 216px;
+
+    &--opened {
+      display: block;
+    }
 
     &::before {
       content: "";
