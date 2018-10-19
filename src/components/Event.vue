@@ -19,7 +19,7 @@
       </div>
       <div class="event__participants">
         <span class="event__host">
-          <img src="../../static/img/faces/oldman.jpg" width="160" height="160" alt="Дарт Вейдер" class="event__img">
+          <img src="../../static/img/faces/spider-man.jpg" width="184" height="184" alt="Дарт Вейдер" class="event__img">
           <span class="event__name">Дарт Вейдер</span>
         </span>
         &nbsp;и&nbsp;

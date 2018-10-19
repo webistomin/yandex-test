@@ -4,6 +4,44 @@ export default {
     startTime: null,
     endTime: null,
     currentFloor: null,
+    selectedMembers: [],
+    allMembers: [
+      {
+        name: 'Человек-паук',
+        avatar: 'spider-man',
+        label: 'Человек-паук',
+      },
+      {
+        name: 'Дедпул',
+        avatar: 'deadpool',
+        label: 'Дедпул',
+      },
+      {
+        name: 'Веном',
+        avatar: 'venom',
+        label: 'Веном',
+      },
+      {
+        name: 'Железный человек',
+        avatar: 'ironman',
+        label: 'Желеный человек',
+      },
+      {
+        name: 'Капитан Америка',
+        avatar: 'captain-america',
+        label: 'Капитан Америка',
+      },
+      {
+        name: 'Халк',
+        avatar: 'hulk',
+        label: 'Халк',
+      },
+      {
+        name: 'Бэтмен',
+        avatar: 'batman',
+        label: 'Бэтмен',
+      },
+    ],
   },
   mutations: {
     setCurrentRoom(state, payload) {
@@ -17,6 +55,9 @@ export default {
     },
     setCurrentFloor(state, payload) {
       state.currentFloor = payload;
+    },
+    setSelectedMembers(state, payload) {
+      state.selectedMembers = Object.assign({}, state.selectedMembers, payload);
     },
   },
   actions: {},
@@ -32,6 +73,12 @@ export default {
     },
     getCurrentFloor(state) {
       return state.currentFloor;
+    },
+    getAllMembers(state) {
+      return state.allMembers;
+    },
+    getSelectedMembers(state) {
+      return state.selectedMembers;
     },
   },
 };

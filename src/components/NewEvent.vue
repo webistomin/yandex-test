@@ -30,16 +30,28 @@
       </div>
       <div class="event-form__block event-form__block--mb event-form__block--mr">
         <label for="members" class="event-form__label">Участники</label>
-        <input type="text" class="event-form__input" id="members" placeholder="Например, Тор Одинович">
-        <ul class="event-form__list">
-          <li class="event-form__item">
-            <img src="../../static/img/faces/oldman.jpg" alt="#" class="event-form__img">
-            <span class="event-form__name event-form__name--padding">Лекс Лютер</span>
-            <button class="event-form__button">X</button>
-          </li>
-          <li class="event-form__item">
-            <img src="../../static/img/faces/oldman.jpg" alt="#" class="event-form__img">
-            <span class="event-form__name event-form__name--padding">Лекс Лютер</span>
+        <v-select @input="setSelectedMembers"
+                  id="members"
+                  :options="getAllMembers"
+                  multiple
+                  :placeholder="'Например, Тор Одинович'">
+          <span slot="no-options">Нет участников :(</span>
+          <template slot="option" slot-scope="option">
+            <img :src="`../../static/img/faces/${option.avatar}.jpg`"
+                 :alt="option.name"
+                 class="event-form__img event-form__img--static">
+            <span class="event-form__name event-form__name--padding">
+              {{option.name}}
+            </span>
+          </template>
+        </v-select>
+        <ul class="event-form__list" v-if="getSelectedMembers.length !== 0">
+          <li class="event-form__item"
+              v-for="member of getSelectedMembers">
+            <img :src="`../../static/img/faces/${member.avatar}.jpg`"
+                 :alt="member.name"
+                 class="event-form__img">
+            <span class="event-form__name event-form__name--padding">{{member.name}}</span>
             <button class="event-form__button">X</button>
           </li>
         </ul>
@@ -72,6 +84,11 @@
   import moment from 'moment';
 
   export default {
+    data() {
+      return {
+        value: [],
+      };
+    },
     name: 'NewEvent',
     computed: {
       isModalOpened() {
@@ -112,16 +129,45 @@
           this.$store.commit('setEndTime', value);
         },
       },
+      getAllMembers() {
+        return this.$store.getters.getAllMembers;
+      },
+      getSelectedMembers() {
+        return this.$store.getters.getSelectedMembers;
+      },
     },
     methods: {
       closeNewEventModal() {
         this.$store.commit('setNewEventModal', false);
+      },
+      setSelectedMembers(value) {
+        this.$store.commit('setSelectedMembers', value);
       },
     },
   };
 </script>
 
 <style lang="less">
+  .v-select .selected-tag {
+    display: none;
+  }
+
+  .v-select .dropdown-toggle {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    padding: 14px 10px;
+    color: #000000;
+    border: 2px solid #E9ECEF;
+    border-radius: 4px;
+
+    @media (min-width: 1366px) {
+      height: 42px;
+      padding: 0;
+    }
+  }
+
   .event-form {
     display: none;
     position: fixed;
@@ -218,6 +264,13 @@
       top: 50%;
       left: 0;
       transform: translateY(-50%);
+
+      &--static {
+        position: relative;
+        top: initial;
+        left: initial;
+        transform: none;
+      }
     }
 
     &__item {
