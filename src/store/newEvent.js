@@ -66,7 +66,10 @@ export default {
       state.currentFloor = payload;
     },
     setSelectedMembers(state, payload) {
+      console.log('1 ', payload);
+      console.log('2 ', state.selectedMembers);
       state.selectedMembers = Object.assign({}, state.selectedMembers, payload);
+      console.log('3 ', state.selectedMembers);
     },
     deleteSelectedMember(state, payload) {
       Object.entries(state.selectedMembers).forEach(

@@ -35,6 +35,7 @@
       <div class="event-form__block event-form__block--mb event-form__block--mr">
         <label for="members" class="event-form__label">Участники</label>
         <v-select @input="setSelectedMembers"
+                  :value="selectedMembers"
                   id="members"
                   :options="getAllMembers"
                   multiple
@@ -94,12 +95,14 @@
 </template>
 
 <script>
+  import Vue from 'vue';
   import moment from 'moment';
-
+  
   export default {
     data() {
       return {
         theme: '',
+        selectedMembers: [],
       };
     },
     name: 'NewEvent',
@@ -160,6 +163,13 @@
         this.$store.commit('setSelectedDate', event.target.value);
       },
       deleteSelectedMember(name) {
+        Object.entries(this.selectedMembers).forEach(
+          ([key, value]) => {
+            if (value.name === name) {
+              Vue.delete(this.selectedMembers, key);
+            }
+          },
+        );
         this.$store.commit('deleteSelectedMember', name);
       },
     },
