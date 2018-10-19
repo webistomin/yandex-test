@@ -1,45 +1,54 @@
+import Vue from 'vue';
+
 export default {
   state: {
     currentRoom: null,
     startTime: null,
     endTime: null,
     currentFloor: null,
-    selectedMembers: [],
+    selectedMembers: {},
     allMembers: [
       {
         name: 'Человек-паук',
         avatar: 'spider-man',
         label: 'Человек-паук',
+        floor: 1,
       },
       {
         name: 'Дедпул',
         avatar: 'deadpool',
         label: 'Дедпул',
+        floor: 2,
       },
       {
         name: 'Веном',
         avatar: 'venom',
         label: 'Веном',
+        floor: 3,
       },
       {
         name: 'Железный человек',
         avatar: 'ironman',
         label: 'Желеный человек',
+        floor: 3,
       },
       {
         name: 'Капитан Америка',
         avatar: 'captain-america',
         label: 'Капитан Америка',
+        floor: 2,
       },
       {
         name: 'Халк',
         avatar: 'hulk',
         label: 'Халк',
+        floor: 1,
       },
       {
         name: 'Бэтмен',
         avatar: 'batman',
         label: 'Бэтмен',
+        floor: 2,
       },
     ],
   },
@@ -58,6 +67,15 @@ export default {
     },
     setSelectedMembers(state, payload) {
       state.selectedMembers = Object.assign({}, state.selectedMembers, payload);
+    },
+    deleteSelectedMember(state, payload) {
+      Object.entries(state.selectedMembers).forEach(
+        ([key, value]) => {
+          if (value.name === payload) {
+            Vue.delete(state.selectedMembers, key);
+          }
+        },
+      );
     },
   },
   actions: {},

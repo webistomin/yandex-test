@@ -1,20 +1,24 @@
 <template>
   <section class="event-form"
            :class="{'event-form--opened' : isModalOpened}">
-    <form action="#" class="event-form__form">
+    <form class="event-form__form">
       <span class="event-form__title">
       Новая встреча
       </span>
       <div class="event-form__block event-form__block--mr">
         <label for="theme" class="event-form__label">Тема</label>
-        <input type="text" class="event-form__input" id="theme" placeholder="О чем будете говорить?">
+        <input type="text" class="event-form__input"
+               id="theme"
+               placeholder="О чем будете говорить?"
+               v-model="theme">
       </div>
       <div class="event-form__block event-form__block--mb event-form__block--flex">
         <div class="event-form__wrapper">
           <label for="date" class="event-form__label">Дата и время</label>
           <input type="date" class="event-form__input" id="date"
                  placeholder="Дата встречи"
-                 :value="getSelectedDate">
+                 :value="getSelectedDate"
+                 @input="changeSelectedDate">
         </div>
         <div class="event-form__inner">
           <label for="start" class="event-form__label event-form__label--hidden">Начало</label>
@@ -34,14 +38,18 @@
                   id="members"
                   :options="getAllMembers"
                   multiple
+                  :max-height="'136px'"
                   :placeholder="'Например, Тор Одинович'">
           <span slot="no-options">Нет участников :(</span>
           <template slot="option" slot-scope="option">
             <img :src="`../../static/img/faces/${option.avatar}.jpg`"
                  :alt="option.name"
                  class="event-form__img event-form__img--static">
-            <span class="event-form__name event-form__name--padding">
+            <span class="event-form__name">
               {{option.name}}
+            </span>
+            <span class="event-form__person-floor">
+             • {{option.floor}} этаж
             </span>
           </template>
         </v-select>
@@ -52,7 +60,12 @@
                  :alt="member.name"
                  class="event-form__img">
             <span class="event-form__name event-form__name--padding">{{member.name}}</span>
-            <button class="event-form__button">X</button>
+            <button class="event-form__button" type="button"
+                    @click="deleteSelectedMember(member.name)">
+              <svg width="10" height="10" class="event-form__icon">
+                <use x="0" y="0" xlink:href="#icon-cross"></use>
+              </svg>
+            </button>
           </li>
         </ul>
       </div>
@@ -86,7 +99,7 @@
   export default {
     data() {
       return {
-        value: [],
+        theme: '',
       };
     },
     name: 'NewEvent',
@@ -143,11 +156,36 @@
       setSelectedMembers(value) {
         this.$store.commit('setSelectedMembers', value);
       },
+      changeSelectedDate(event) {
+        this.$store.commit('setSelectedDate', event.target.value);
+      },
+      deleteSelectedMember(name) {
+        this.$store.commit('deleteSelectedMember', name);
+      },
     },
   };
 </script>
 
 <style lang="less">
+  .dropdown-menu {
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #e9ecef;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar {
+      height: 8px;
+      width: 10px;
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: #1d54fe;
+    }
+  }
+
   .v-select .selected-tag {
     display: none;
   }
@@ -196,6 +234,25 @@
       background-color: #E9ECEF;
     }
 
+    &__error {
+      padding-top: 5px;
+      color: red;
+      font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    &__button {
+      cursor: pointer;
+    }
+
+    &__person-floor {
+      font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #858E98;
+    }
+
     &__title {
       display: block;
       font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
@@ -237,6 +294,14 @@
       color: #000000;
       border: 2px solid #E9ECEF;
       border-radius: 4px;
+
+      &--invalid {
+        border-color: red;
+      }
+
+      &--valid {
+        border-color: lightgreen;
+      }
     }
 
     &__inner {

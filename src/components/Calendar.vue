@@ -2,8 +2,8 @@
   <section class="calendar">
     <button class="calendar__btn calendar__btn--previous"
     @click="removeOneDay">Назад
-      <svg width="16" height="16" class="calendar__icon">
-        <use x="2" y="0" xlink:href="#icon-arrow"></use>
+      <svg width="10" height="10" class="calendar__icon">
+        <use x="0" y="0" xlink:href="#icon-arrow"></use>
       </svg>
     </button>
     <time class="calendar__date">
@@ -21,8 +21,8 @@
     </time>
     <button class="calendar__btn calendar__btn--next"
             @click="addOneDay">Вперед
-      <svg width="16" height="16" class="calendar__icon">
-        <use x="2" y="0" xlink:href="#icon-arrow"></use>
+      <svg width="10" height="10" class="calendar__icon">
+        <use x="0" y="0" xlink:href="#icon-arrow"></use>
       </svg>
     </button>
   </section>
