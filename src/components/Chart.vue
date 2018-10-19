@@ -13,7 +13,8 @@
         <div class="room" v-for="roomData of room.roomList">
           <div class="room__row">
             <div class="room__cell"
-                 :data-time="index+7"
+                 :data-start="index+7"
+                 :data-end="index+8"
                  :data-room="roomData.roomName"
                  :data-floor="room.floor"
                  v-for="(cell, index) of 17"
@@ -104,7 +105,16 @@
       openNewEventModal(event) {
         this.$store.commit('setNewEventModal', true);
         this.$store.commit('setCurrentRoom', event.target.dataset.room);
-        this.$store.commit('setCurrentTime', event.target.dataset.time);
+        if (event.target.dataset.start < 10) {
+          this.$store.commit('setStartTime', `0${event.target.dataset.start}:00`);
+        } else {
+          this.$store.commit('setStartTime', `${event.target.dataset.start}:00`);
+        }
+        if (event.target.dataset.end < 10) {
+          this.$store.commit('setEndTime', `0${event.target.dataset.end}:00`);
+        } else {
+          this.$store.commit('setEndTime', `${event.target.dataset.end}:00`);
+        }
         this.$store.commit('setCurrentFloor', event.target.dataset.floor);
       },
     },

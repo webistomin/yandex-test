@@ -53,13 +53,13 @@
         const result = this.now || new Date();
         result.setDate(result.getDate() + 1);
         this.now = new Date(result);
-        this.$store.commit('setDate', this.now);
+        this.$store.commit('setSelectedDate', this.now);
       },
       removeOneDay() {
         const result = this.now || new Date();
         result.setDate(result.getDate() - 1);
         this.now = new Date(result);
-        this.$store.commit('setDate', this.now);
+        this.$store.commit('setSelectedDate', this.now);
       },
     },
     computed: {

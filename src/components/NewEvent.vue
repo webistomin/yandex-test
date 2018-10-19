@@ -14,7 +14,7 @@
           <label for="date" class="event-form__label">Дата и время</label>
           <input type="date" class="event-form__input" id="date"
                  placeholder="Дата встречи"
-                 :value="getCurrentDate">
+                 :value="getSelectedDate">
         </div>
         <div class="event-form__inner">
           <label for="start" class="event-form__label event-form__label--hidden">Начало</label>
@@ -86,30 +86,27 @@
       getCurrentFloor() {
         return this.$store.getters.getCurrentFloor;
       },
-      getCurrentDate() {
-        const now = this.$store.getters.getCurrentDate;
+      getSelectedDate() {
+        const now = this.$store.getters.getSelectedDate;
         return moment(now).format('YYYY-MM-DD');
+      },
+      getStartTime() {
+        return this.$store.getters.getStartTime;
+      },
+      getEndTime() {
+        return this.$store.getters.getEndTime;
       },
       startTime: {
         get() {
-          if (this.getCurrentTime < 10) {
-            return `0${+this.getCurrentTime}:00`;
-          }
-          return `${+this.getCurrentTime}:00`;
+          return this.getStartTime;
         },
         set(value) {
-          if (value < 10) {
-            this.$store.commit('setCurrentTime', value.slice(0, 1));
-          }
-          this.$store.commit('setCurrentTime', value.slice(0, 2));
+          this.$store.commit('setStartTime', value);
         },
       },
       endTime: {
         get() {
-          if (this.getEndTime < 10) {
-            return `0${+this.getCurrentTime + 1}:00`;
-          }
-          return `${+this.getCurrentTime + 1}:00`;
+          return this.getEndTime;
         },
         set(value) {
           this.$store.commit('setEndTime', value);

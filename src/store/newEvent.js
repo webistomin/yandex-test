@@ -1,7 +1,7 @@
 export default {
   state: {
     currentRoom: null,
-    currentTime: null,
+    startTime: null,
     endTime: null,
     currentFloor: null,
   },
@@ -9,8 +9,8 @@ export default {
     setCurrentRoom(state, payload) {
       state.currentRoom = payload;
     },
-    setCurrentTime(state, payload) {
-      state.currentTime = payload;
+    setStartTime(state, payload) {
+      state.startTime = payload;
     },
     setEndTime(state, payload) {
       state.endTime = payload;
@@ -24,8 +24,8 @@ export default {
     getCurrentRoom(state) {
       return state.currentRoom;
     },
-    getCurrentTime(state) {
-      return state.currentTime;
+    getStartTime(state) {
+      return state.startTime;
     },
     getEndTime(state) {
       return state.endTime;
