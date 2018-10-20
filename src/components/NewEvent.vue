@@ -107,10 +107,11 @@
         </ul>
       </div>
       <div class="event-form__actions">
-        <button class="event-form__btn btn" type="button"
+        <button class="event-form__btn event-form__btn--grey btn" type="button"
                 @click="closeNewEventModal">Отмена
         </button>
         <button class="event-form__btn btn" type="submit"
+                :class="{'event-form__btn--disabled': !isFormValid}"
                 :disabled="!isFormValid">
           Создать встречу
         </button>
@@ -409,14 +410,6 @@
       color: #000000;
       border: 2px solid #e9ecef;
       border-radius: 4px;
-
-      &--invalid {
-        border-color: red;
-      }
-
-      &--valid {
-        border-color: lightgreen;
-      }
     }
 
     &__inner {
@@ -531,6 +524,28 @@
       width: 100%;
       max-width: 238px;
       margin-bottom: 8px;
+
+      &--grey {
+        background-color: #E9ECEF;
+        color: #000000;
+        font-weight: 700;
+
+        &:hover {
+          background-color: #D5DFE9;
+        }
+
+        &:active {
+          background-color: #98A9B9;
+        }
+      }
+
+      &--disabled {
+        background-color: #E5E5E5;
+        color: #8B8E92;
+        user-select: none;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
     }
 
     @media (min-width: 768px) {
@@ -569,6 +584,15 @@
 
       &__actions {
         position: relative;
+      }
+
+      &__btn {
+        width: 140px;
+        margin-right: 16px;
+
+        &--grey {
+          width: 80px;
+        }
       }
     }
 

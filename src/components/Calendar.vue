@@ -151,6 +151,7 @@
       font-size: 0;
       flex-shrink: 0;
       position: relative;
+      cursor: pointer;
 
       &:hover,
       &:focus {
