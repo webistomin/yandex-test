@@ -4,7 +4,7 @@
     <chart></chart>
     <event></event>
     <new-event></new-event>
-    <event-created></event-created>
+    <event-created v-if=""></event-created>
   </div>
 </template>
 

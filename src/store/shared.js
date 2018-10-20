@@ -1,8 +1,10 @@
 export default {
   state: {
+    eventsList: [],
     now: new Date(),
     selectedDate: new Date(),
     isOpenedNewEventModal: false,
+    isOpenedEventCreatedModal: false,
   },
   mutations: {
     setDate(state, payload) {
@@ -14,6 +16,12 @@ export default {
     setNewEventModal(state, payload) {
       state.isOpenedNewEventModal = payload;
     },
+    setEventCreatedModal(state, payload) {
+      state.isOpenedEventCreatedModal = payload;
+    },
+    setNewEvent(state, payload) {
+      state.eventsList.push(payload);
+    },
   },
   getters: {
     getCurrentDate(state) {
@@ -24,6 +32,9 @@ export default {
     },
     getNewEventModal(state) {
       return state.isOpenedNewEventModal;
+    },
+    getEventCreatedModal(state) {
+      return state.isOpenedEventCreatedModal;
     },
   },
 };

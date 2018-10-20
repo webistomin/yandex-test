@@ -1,7 +1,7 @@
 <template>
   <section class="event-form"
            :class="{'event-form--opened' : isModalOpened}">
-    <form class="event-form__form">
+    <form method="#" class="event-form__form" @submit.prevent="submitRoom">
       <span class="event-form__title">
       Новая встреча
       </span>
@@ -110,7 +110,8 @@
         <button class="event-form__btn btn" type="button"
                 @click="closeNewEventModal">Отмена
         </button>
-        <button class="event-form__btn btn" type="submit" v-show="isFormValid">
+        <button class="event-form__btn btn" type="submit"
+                :disabled="!isFormValid">
           Создать встречу
         </button>
       </div>
@@ -257,6 +258,18 @@
             },
           );
         this.$store.commit('deleteSelectedMember', name);
+      },
+      submitRoom() {
+        this.$store.commit('setNewEvent', {
+          floor: this.getCurrentFloor,
+          room: this.getCurrentRoom,
+          theme: this.currentTheme,
+          startTime: this.getStartTime,
+          endTime: this.getEndTime,
+          members: this.getSelectedMembers,
+        });
+        this.$store.commit('setNewEventModal', false);
+        this.$store.commit('setEventCreatedModal', true);
       },
     },
   };

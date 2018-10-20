@@ -1,34 +1,67 @@
 <template>
-  <section class="event-created">
+  <section class="event-created"
+           :class="{'event-created--opened': getEventCreatedModal}">
     <div class="event-created__inner">
       <span class="event-created__title">Встреча создана</span>
       <div class="event-created__info">
-        <span class="event-created__date">14 декабря</span>,
+        <span class="event-created__date">{{getSelectedDate}}</span>,
         <div class="event-created__duration">
-          <span class="event-created__time">15:00</span>
+          <span class="event-created__time">{{getStartTime}}</span>
           –
-          <span class="event-created__time">17:00</span>
+          <span class="event-created__time">{{getEndTime}}</span>
         </div>
         <div class="event-created__place">
-          <span class="event-created__room">Готем</span>
+          <span class="event-created__room">{{getCurrentRoom}}</span>
           •
-          <span class="event-created__floor">4 этаж</span>
+          <span class="event-created__floor">{{getCurrentFloor}} этаж</span>
         </div>
       </div>
-      <button class="event-created__btn btn">Хорошо</button>
+      <button class="event-created__btn btn"
+              type="button"
+              @click="setEventCreatedModal">
+        Хорошо
+      </button>
     </div>
   </section>
 </template>
 
 <script>
+  import moment from 'moment';
+
   export default {
     name: 'EventCreated',
+    computed: {
+      getEventCreatedModal() {
+        return this.$store.getters.getEventCreatedModal;
+      },
+      getCurrentRoom() {
+        return this.$store.getters.getCurrentRoom;
+      },
+      getCurrentFloor() {
+        return this.$store.getters.getCurrentFloor;
+      },
+      getStartTime() {
+        return this.$store.getters.getStartTime;
+      },
+      getEndTime() {
+        return this.$store.getters.getEndTime;
+      },
+      getSelectedDate() {
+        const date = this.$store.getters.getSelectedDate;
+        moment.locale('ru');
+        return `${moment(date).format('DD MMMM')}`;
+      },
+    },
+    methods: {
+      setEventCreatedModal() {
+        this.$store.commit('setEventCreatedModal', false);
+      },
+    },
   };
 </script>
 
 <style lang="less">
   .event-created {
-    display: flex;
     display: none;
     align-items: center;
     justify-content: center;
@@ -38,6 +71,10 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0,16,33,0.40);
+
+    &--opened {
+      display: flex;
+    }
 
     &__inner {
       background-image: url("../../static/img/emoji2.svg");
