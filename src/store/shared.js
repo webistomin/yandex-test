@@ -36,5 +36,8 @@ export default {
     getEventCreatedModal(state) {
       return state.isOpenedEventCreatedModal;
     },
+    getEventsList(state) {
+      return state.eventsList;
+    },
   },
 };

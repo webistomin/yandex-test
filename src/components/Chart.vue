@@ -21,6 +21,10 @@
                  :key="index"
                  @click="openNewEventModal($event)">
             </div>
+            <div class="room__cell--taken"
+                 v-for="taken of getEventsList"
+                 v-if="taken.room === roomData.roomName">
+            </div>
           </div>
           <div class="room__inner"
                :class="{'room__inner--scrolled' : isScrolled}">
@@ -116,6 +120,11 @@
           this.$store.commit('setEndTime', `${event.target.dataset.end}:00`);
         }
         this.$store.commit('setCurrentFloor', event.target.dataset.floor);
+      },
+    },
+    computed: {
+      getEventsList() {
+        return this.$store.getters.getEventsList;
       },
     },
     components: {
@@ -251,7 +260,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      z-index: 1;
+      z-index: 3;
 
       &--scrolled {
         position: sticky;
@@ -261,6 +270,7 @@
 
     &__row {
       display: flex;
+      position: relative;
 
       &:hover {
         & + .room__inner .room__name {
@@ -279,7 +289,7 @@
       height: 58px;
       cursor: pointer;
       position: relative;
-      z-index: 5;
+      z-index: 1;
 
       &::before,
       &::after {
@@ -312,7 +322,14 @@
       }
 
       &--taken {
+        position: absolute;
+        width: 100px;
+        height: 58px;
+        left: 50px;
+        top: 0;
         background-color: #d5dfe9;
+        z-index: 3;
+        cursor: pointer;
 
         &:hover {
           background-color: #98a9b9;
@@ -378,8 +395,12 @@
         z-index: 0;
 
         &--taken {
+          width: 100px;
+          height: 28px;
           background-color: #d5dfe9;
-          position: relative;
+          position: absolute;
+          left: 50px;
+          top: 8px;
         }
       }
 
@@ -388,18 +409,6 @@
         align-items: center;
         background-color: #f6f7f9;
         position: relative;
-
-        &::before {
-          display: block;
-          content: "";
-          width: 100px;
-          height: 28px;
-          position: absolute;
-          background-color: #d5dfe9;
-          left: 50px;
-          top: 8px;
-          z-index: 1;
-        }
       }
 
       &__name {
