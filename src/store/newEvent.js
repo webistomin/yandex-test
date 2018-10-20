@@ -6,6 +6,7 @@ export default {
     startTime: null,
     endTime: null,
     currentFloor: null,
+    currentTheme: null,
     selectedMembers: {},
     allMembers: [
       {
@@ -66,10 +67,7 @@ export default {
       state.currentFloor = payload;
     },
     setSelectedMembers(state, payload) {
-      console.log('1 ', payload);
-      console.log('2 ', state.selectedMembers);
       state.selectedMembers = Object.assign({}, state.selectedMembers, payload);
-      console.log('3 ', state.selectedMembers);
     },
     deleteSelectedMember(state, payload) {
       Object.entries(state.selectedMembers).forEach(
@@ -79,6 +77,9 @@ export default {
           }
         },
       );
+    },
+    setCurrentTheme(state, payload) {
+      state.currentTheme = payload;
     },
   },
   actions: {},
@@ -100,6 +101,9 @@ export default {
     },
     getSelectedMembers(state) {
       return state.selectedMembers;
+    },
+    getCurrentTheme(state) {
+      return state.currentTheme;
     },
   },
 };

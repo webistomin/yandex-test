@@ -9,27 +9,45 @@
         <label for="theme" class="event-form__label">Тема</label>
         <input type="text" class="event-form__input"
                id="theme"
+               name="theme"
+               required
                placeholder="О чем будете говорить?"
-               v-model="theme">
+               v-model="currentTheme">
+        <span class="event-form__error">
+          {{themeValidation}}
+        </span>
       </div>
       <div class="event-form__block event-form__block--mb event-form__block--flex">
         <div class="event-form__wrapper">
           <label for="date" class="event-form__label">Дата и время</label>
           <input type="date" class="event-form__input" id="date"
+                 name="date"
                  placeholder="Дата встречи"
                  :value="getSelectedDate"
-                 @input="changeSelectedDate">
+                 @input="changeSelectedDate"
+                 :min="getCurrentDate"
+                 required>
         </div>
+        <span class="event-form__error event-form__error--width">
+          {{dateValidation}}
+        </span>
         <div class="event-form__inner">
           <label for="start" class="event-form__label event-form__label--hidden">Начало</label>
           <input type="time" class="event-form__input"
                  id="start" placeholder="Начало встречи"
-                 v-model="startTime">
+                 v-model="startTime"
+                 name="start"
+                 min="07:00:00" max="23:00:00">
           <span class="event-form__dash">–</span>
           <label for="end" class="event-form__label event-form__label--hidden">Конец</label>
           <input type="time" class="event-form__input" id="end"
                  placeholder="Конец встречи"
-                 v-model="endTime">
+                 v-model="endTime"
+                 name="end"
+                 min="07:01:00" max="23:59:59">
+          <span class="event-form__error event-form__error--bottom">
+          {{timeValidation}}
+          </span>
         </div>
       </div>
       <div class="event-form__block event-form__block--mb event-form__block--mr">
@@ -54,6 +72,9 @@
             </span>
           </template>
         </v-select>
+        <span class="event-form__error">
+          {{membersValidation}}
+          </span>
         <ul class="event-form__list" v-if="getSelectedMembers.length !== 0">
           <li class="event-form__item"
               v-for="member of getSelectedMembers">
@@ -73,7 +94,7 @@
       <div class="event-form__block">
         <span class="event-form__label">Выбранная переговорка</span>
         <ul class="event-form__rooms">
-          <li class="event-form__room">
+          <li class="event-form__room event-form__room--selected">
             <div class="event-form__duration">
               <time class="event-form__time">{{startTime}}</time>
               –
@@ -87,8 +108,11 @@
       </div>
       <div class="event-form__actions">
         <button class="event-form__btn btn" type="button"
-                @click="closeNewEventModal">Отмена</button>
-        <button class="event-form__btn btn" type="submit">Создать встречу</button>
+                @click="closeNewEventModal">Отмена
+        </button>
+        <button class="event-form__btn btn" type="submit" v-show="isFormValid">
+          Создать встречу
+        </button>
       </div>
     </form>
   </section>
@@ -97,12 +121,15 @@
 <script>
   import Vue from 'vue';
   import moment from 'moment';
-  
+
   export default {
     data() {
       return {
-        theme: '',
         selectedMembers: [],
+        isThemeValid: false,
+        isDateValid: false,
+        isTimeValid: false,
+        isMembersValid: false,
       };
     },
     name: 'NewEvent',
@@ -121,7 +148,8 @@
       },
       getSelectedDate() {
         const now = this.$store.getters.getSelectedDate;
-        return moment(now).format('YYYY-MM-DD');
+        return moment(now)
+          .format('YYYY-MM-DD');
       },
       getStartTime() {
         return this.$store.getters.getStartTime;
@@ -151,6 +179,63 @@
       getSelectedMembers() {
         return this.$store.getters.getSelectedMembers;
       },
+      getCurrentDate() {
+        const now = this.$store.getters.getCurrentDate;
+        return moment(now)
+          .format('YYYY-MM-DD');
+      },
+      currentTheme: {
+        get() {
+          return this.$store.getters.getCurrentTheme;
+        },
+        set(value) {
+          this.$store.commit('setCurrentTheme', value);
+        },
+      },
+      themeValidation() {
+        if (this.currentTheme == null || this.currentTheme.length === 0) {
+          this.isThemeValid = false;
+          return 'Тема обязательна к заполнению';
+        } else if (this.currentTheme.length < 4) {
+          this.isThemeValid = false;
+          return 'Тема должна состоять как минимум из 4 символов';
+        }
+        this.isThemeValid = true;
+        return '';
+      },
+      dateValidation() {
+        const now = new Date();
+        const today = moment(now)
+          .format('YYYY-MM-DD');
+        if (this.getSelectedDate === 'Invalid date') {
+          this.isDateValid = false;
+          return 'Необходимо выбрать дату';
+        } else if (new Date(this.getSelectedDate).getTime() < new Date(today).getTime()) {
+          this.isDateValid = false;
+          return 'Дата должна быть больше или равна текущей';
+        }
+        this.isDateValid = true;
+        return '';
+      },
+      timeValidation() {
+        if (this.endTime <= this.startTime) {
+          this.isTimeValid = false;
+          return 'Начало должно быть раньше конца';
+        }
+        this.isTimeValid = true;
+        return '';
+      },
+      membersValidation() {
+        if (this.selectedMembers.length === 0) {
+          this.isMembersValid = false;
+          return 'Нужно выбрать хотя бы одного участника';
+        }
+        this.isMembersValid = true;
+        return '';
+      },
+      isFormValid() {
+        return this.isThemeValid && this.isDateValid && this.isTimeValid && this.isMembersValid;
+      },
     },
     methods: {
       closeNewEventModal() {
@@ -163,13 +248,14 @@
         this.$store.commit('setSelectedDate', event.target.value);
       },
       deleteSelectedMember(name) {
-        Object.entries(this.selectedMembers).forEach(
-          ([key, value]) => {
-            if (value.name === name) {
-              Vue.delete(this.selectedMembers, key);
-            }
-          },
-        );
+        Object.entries(this.selectedMembers)
+          .forEach(
+            ([key, value]) => {
+              if (value.name === name) {
+                Vue.delete(this.selectedMembers, key);
+              }
+            },
+          );
         this.$store.commit('deleteSelectedMember', name);
       },
     },
@@ -207,7 +293,7 @@
     font-size: 15px;
     padding: 14px 10px;
     color: #000000;
-    border: 2px solid #E9ECEF;
+    border: 2px solid #e9ecef;
     border-radius: 4px;
 
     @media (min-width: 1366px) {
@@ -225,7 +311,7 @@
     z-index: 100;
     background-color: #ffffff;
     padding: 24px 16px;
-    box-shadow: 0 -1px 0 0 #E9ECEF;
+    box-shadow: 0 -1px 0 0 #e9ecef;
     box-sizing: border-box;
     overflow: auto;
     padding-bottom: 216px;
@@ -241,15 +327,20 @@
       left: 0;
       width: 100%;
       height: 8px;
-      background-color: #E9ECEF;
+      background-color: #e9ecef;
     }
 
     &__error {
-      padding-top: 5px;
+      position: absolute;
+      top: 74px;
       color: red;
       font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
       font-weight: 700;
-      font-size: 12px;
+      font-size: 10px;
+
+      &--bottom {
+        top: 140px;
+      }
     }
 
     &__button {
@@ -260,7 +351,7 @@
       font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
       font-weight: 400;
       font-size: 13px;
-      color: #858E98;
+      color: #858e98;
     }
 
     &__title {
@@ -277,6 +368,7 @@
       display: flex;
       flex-direction: column;
       margin-bottom: 16px;
+      position: relative;
 
       &--mb {
         margin-bottom: 44px;
@@ -302,7 +394,7 @@
       font-size: 15px;
       padding: 14px 10px;
       color: #000000;
-      border: 2px solid #E9ECEF;
+      border: 2px solid #e9ecef;
       border-radius: 4px;
 
       &--invalid {
@@ -351,7 +443,7 @@
     &__item {
       display: flex;
       align-items: center;
-      background-color: #E9ECEF;
+      background-color: #e9ecef;
       border-radius: 16px;
       padding: 4px 8px;
       position: relative;
@@ -381,15 +473,16 @@
       display: flex;
       align-items: baseline;
       padding: 12px 14px;
-      background-color: #E9ECEF;
+      background-color: #e9ecef;
       border-radius: 4px;
       margin-bottom: 8px;
       font-size: 15px;
       font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
       color: #000000;
 
-      &:hover {
-        background-color: #007DFF;
+      &:hover,
+      &--selected {
+        background-color: #007dff;
         color: #ffffff;
 
         .event-form__name {
@@ -432,7 +525,12 @@
       &::after {
         display: none;
       }
+
       padding-bottom: 50px;
+
+      &__error {
+        font-size: 13px;
+      }
 
       &__title {
         text-align: center;
@@ -463,6 +561,14 @@
 
     @media (min-width: 1366px) {
       top: 62px;
+
+      &__error {
+        top: 60px;
+
+        &--width {
+          width: 210px;
+        }
+      }
 
       &__form {
         width: 880px;
@@ -497,7 +603,6 @@
         margin-top: 0;
       }
     }
-
 
   }
 </style>
