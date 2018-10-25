@@ -23,7 +23,7 @@
             </div>
             <div class="room__cell--taken"
                  v-for="taken of getEventsList"
-                 v-if="taken.room === roomData.roomName">
+                 v-if="taken.room === roomData.roomName && taken.date === getSelectedDate">
             </div>
           </div>
           <div class="room__inner"
@@ -44,6 +44,7 @@
 </template>
 
 <script>
+  import moment from 'moment';
   import Timeline from './Timeline';
 
   export default {
@@ -125,6 +126,10 @@
     computed: {
       getEventsList() {
         return this.$store.getters.getEventsList;
+      },
+      getSelectedDate() {
+        const date = this.$store.getters.getSelectedDate;
+        return moment(date).format('YYYY-MM-DD');
       },
     },
     components: {

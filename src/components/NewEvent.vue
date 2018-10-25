@@ -207,8 +207,7 @@
       },
       dateValidation() {
         const now = new Date();
-        const today = moment(now)
-          .format('YYYY-MM-DD');
+        const today = moment(now).format('YYYY-MM-DD');
         if (this.getSelectedDate === 'Invalid date') {
           this.isDateValid = false;
           return 'Необходимо выбрать дату';
@@ -265,6 +264,7 @@
           floor: this.getCurrentFloor,
           room: this.getCurrentRoom,
           theme: this.currentTheme,
+          date: this.getSelectedDate,
           startTime: this.getStartTime,
           endTime: this.getEndTime,
           members: this.getSelectedMembers,
@@ -294,6 +294,26 @@
       border-radius: 10px;
       background-color: #1d54fe;
     }
+
+    & a:hover {
+      background-color: #f5f5f5 !important;
+    }
+
+    & li:hover {
+      background-color: #f5f5f5 !important;
+    }
+
+    & li.active.highlight a {
+      background-color: #f5f5f5 !important;
+    }
+
+    & li.highlight a {
+      background-color: #f5f5f5 !important;
+    }
+
+    & li:hover span {
+      font-weight: 700;
+    }
   }
 
   .v-select .selected-tag {
@@ -309,6 +329,11 @@
     color: #000000;
     border: 2px solid #e9ecef;
     border-radius: 4px;
+
+    &:focus,
+    &:hover {
+      border-color: #007dff;
+    }
 
     @media (min-width: 1366px) {
       height: 42px;
@@ -410,6 +435,11 @@
       color: #000000;
       border: 2px solid #e9ecef;
       border-radius: 4px;
+
+      &:focus,
+      &:hover {
+        border-color: #007dff;
+      }
     }
 
     &__inner {
