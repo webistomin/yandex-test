@@ -23,7 +23,8 @@
             </div>
             <div class="room__cell--taken"
                  v-for="taken of getEventsList"
-                 v-if="taken.room === roomData.roomName && taken.date === getSelectedDate">
+                 v-if="taken.room === roomData.roomName && taken.date === getSelectedDate"
+                 :style="{ width: getWidth(taken) + 'px', left: getLeftPosition(taken) + 'px' }">
             </div>
           </div>
           <div class="room__inner"
@@ -52,6 +53,7 @@
     data() {
       return {
         isScrolled: false,
+        windowSize: window.screen.width,
         rooms: [
           {
             id: 7,
@@ -121,6 +123,21 @@
           this.$store.commit('setEndTime', `${event.target.dataset.end}:00`);
         }
         this.$store.commit('setCurrentFloor', event.target.dataset.floor);
+      },
+      getWidth(cell) {
+        const startTime = cell.startTime;
+        const endTime = cell.endTime;
+        if (this.windowSize < 1366) {
+          return (endTime.slice(0, 2) - startTime.slice(0, 2)) * 67;
+        }
+        return (endTime.slice(0, 2) - startTime.slice(0, 2)) * 67.2;
+      },
+      getLeftPosition(cell) {
+        const startTime = cell.startTime;
+        if (this.window < 1366) {
+          return (startTime.slice(0, 2) * 67) - 470.4;
+        }
+        return (startTime.slice(0, 2) * 67.2) - 470.4;
       },
     },
     computed: {
