@@ -1,49 +1,91 @@
 <template>
-  <section class="event">
-    <div class="event__inner">
+  <section class="event" :class="{'event--opened': isOpened}"
+  :style="{left: getLeftPosition + 'px', top: getTopPosition + 'px'}">
+    <div class="event__inner" v-if="getCurrentEvent != null">
       <div class="event__heading">
-        <span class="event__title">Рассуждение о высоком</span>
+        <span class="event__title">{{getCurrentEvent.theme}}</span>
         <button class="event__btn">Редактировать
-          <svg width="16" height="16" class="event__icon">
-            <use x="2" y="2" xlink:href="#icon-pen"></use>
+          <svg width="12" height="12" class="event__icon">
+            <use x="0" y="0" xlink:href="#icon-pen"></use>
           </svg>
         </button>
       </div>
       <div class="event__info">
-        <time class="event__date">14 декабря</time>
+        <time class="event__date">{{getCurrentEventDate}}</time>
         ,
-        <span class="event__time">15:00</span>–
-        <span class="event__time">17:00</span>
+        <span class="event__time">{{getCurrentEvent.startTime}}</span>
+        &nbsp;–&nbsp;
+        <span class="event__time">{{getCurrentEvent.endTime}}</span>
         •
-        <span class="event__room">Ржавый Фред</span>
+        <span class="event__room">{{getCurrentEvent.room}}</span>
       </div>
       <div class="event__participants">
         <span class="event__host">
-          <img src="../../static/img/faces/spider-man.jpg" width="184" height="184" alt="Дарт Вейдер" class="event__img">
+          <img src="../../static/img/faces/spider-man.jpg"
+               alt="Дарт Вейдер"
+               class="event__img">
           <span class="event__name">Дарт Вейдер</span>
         </span>
         &nbsp;и&nbsp;
-        <span class="event__count">12</span>
-        &nbsp;участников&nbsp;
+        <span class="event__count">{{getMembersCount}}</span>
+        &nbsp;{{getCorrectEnding(getMembersCount, ['участник', 'участника', 'участников'])}}
       </div>
     </div>
   </section>
 </template>
 
 <script>
+  import moment from 'moment';
+
   export default {
     name: 'Event',
+    methods: {
+      getCorrectEnding(number, word) {
+        const cases = [2, 0, 1, 1, 1, 2];
+        return word[(number % 100 > 4 && number % 100 < 20) ?
+          2 :
+          cases[(number % 10 < 5) ? number % 10 : 5]];
+      },
+    },
+    computed: {
+      isOpened() {
+        return this.$store.getters.getEventModal;
+      },
+      getLeftPosition() {
+        return this.$store.getters.getCoordX - 144;
+      },
+      getTopPosition() {
+        return this.$store.getters.getCoordY + 25;
+      },
+      getCurrentEvent() {
+        return this.$store.getters.getCurrentEvent;
+      },
+      getCurrentEventDate() {
+        const date = this.getCurrentEvent.date;
+        moment.locale('ru');
+        return `${moment(date).format('DD MMMM')}`;
+      },
+      getMembersCount() {
+        return Object.keys(this.getCurrentEvent.members).length;
+      },
+    },
   };
 </script>
 
 <style lang="less">
   .event {
+    position: absolute;
     display: none;
     padding: 20px 16px;
     max-width: 360px;
-    position: relative;
     box-shadow: 0 1px 16px 0;
     border-radius: 8px;
+    z-index: 1;
+    background-color: #ffffff;
+
+    &--opened {
+      display: block;
+    }
 
     &::before {
       content: "";
@@ -61,6 +103,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 8px;
     }
 
     &__title {
@@ -68,7 +111,6 @@
       font-size: 20px;
       font-weight: 700;
       color: #000000;
-      margin-bottom: 8px;
     }
 
     &__icon {
@@ -86,10 +128,8 @@
       &:focus {
         background-color: #f2f3f4;
 
-        &__icon {
-          .icon-fill {
-            fill: #000000;
-          }
+        .event__icon {
+          fill: #000000;
         }
       }
     }
@@ -123,6 +163,11 @@
 
     &__participants {
       color: #858e98;
+    }
+
+    &__img {
+      width: 24px;
+      height: 24px;
     }
   }
 </style>

@@ -24,7 +24,11 @@
             <div class="room__cell--taken"
                  v-for="taken of getEventsList"
                  v-if="taken.room === roomData.roomName && taken.date === getSelectedDate"
-                 :style="{ width: getWidth(taken) + 'px', left: getLeftPosition(taken) + 'px' }">
+                 :style="{
+                  width: getWidth(taken) + 'px',
+                  left: getLeftPosition(taken) + 'px'
+                 }"
+                 @click="showEventPopup($event, taken)">
             </div>
           </div>
           <div class="room__inner"
@@ -138,6 +142,12 @@
           return (startTime.slice(0, 2) * 67) - 470.4;
         }
         return (startTime.slice(0, 2) * 67.2) - 470.4;
+      },
+      showEventPopup(event, eventInfo) {
+        this.$store.commit('setEventModal', true);
+        this.$store.commit('setCoordX', event.clientX);
+        this.$store.commit('setCoordY', event.clientY);
+        this.$store.commit('setCurrentEvent', eventInfo);
       },
     },
     computed: {
@@ -350,7 +360,7 @@
         left: 50px;
         top: 0;
         background-color: #d5dfe9;
-        z-index: 3;
+        z-index: 1;
         cursor: pointer;
 
         &:hover {
