@@ -149,7 +149,6 @@
       showEventPopup(event, eventInfo) {
         if (this.$store.getters.getEventModal && event.target === this.currentTarget) {
           this.currentTarget = null;
-          console.log('work');
           this.$store.commit('setEventModal', false);
         } else {
           this.currentTarget = event.target;

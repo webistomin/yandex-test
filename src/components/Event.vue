@@ -1,6 +1,6 @@
 <template>
   <section class="event" :class="{'event--opened': isOpened}"
-  :style="{left: getLeftPosition + 'px', top: getTopPosition + 'px'}">
+           :style="{left: getLeftPosition + 'px', top: getTopPosition + 'px'}">
     <div class="event__inner" v-if="getCurrentEvent != null">
       <div class="event__heading">
         <span class="event__title">{{getCurrentEvent.theme}}</span>
@@ -11,10 +11,8 @@
         </button>
       </div>
       <div class="event__info">
-        <time class="event__date">{{getCurrentEventDate}}</time>
-        ,
-        <span class="event__time">{{getCurrentEvent.startTime}}</span>
-        &nbsp;–&nbsp;
+        <time class="event__date">{{getCurrentEventDate}}</time>,
+        <span class="event__time">{{getCurrentEvent.startTime}}</span> –
         <span class="event__time">{{getCurrentEvent.endTime}}</span>
         •
         <span class="event__room">{{getCurrentEvent.room}}</span>
@@ -25,8 +23,7 @@
                alt="Дарт Вейдер"
                class="event__img">
           <span class="event__name">Дарт Вейдер</span>
-        </span>
-        &nbsp;и&nbsp;
+        </span>&nbsp;и&nbsp;
         <span class="event__count">{{getMembersCount}}</span>
         &nbsp;{{getCorrectEnding(getMembersCount, ['участник', 'участника', 'участников'])}}
       </div>
@@ -52,10 +49,10 @@
         return this.$store.getters.getEventModal;
       },
       getLeftPosition() {
-        return this.$store.getters.getCoordX - 144;
+        return this.$store.getters.getCoordX - 130;
       },
       getTopPosition() {
-        return this.$store.getters.getCoordY + 25;
+        return this.$store.getters.getCoordY - 30;
       },
       getCurrentEvent() {
         return this.$store.getters.getCurrentEvent;
@@ -80,7 +77,7 @@
     max-width: 360px;
     box-shadow: 0 1px 16px 0;
     border-radius: 8px;
-    z-index: 1;
+    z-index: 3;
     background-color: #ffffff;
 
     &--opened {
@@ -111,6 +108,10 @@
       font-size: 20px;
       font-weight: 700;
       color: #000000;
+      max-width: 200px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     &__icon {

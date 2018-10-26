@@ -2,16 +2,14 @@
   <div id="app">
     <page-header></page-header>
     <chart></chart>
-    <event></event>
     <new-event></new-event>
-    <event-created v-if=""></event-created>
+    <event-created></event-created>
   </div>
 </template>
 
 <script>
 import pageHeader from './components/PageHeader';
 import Chart from './components/Chart';
-import Event from './components/Event';
 import NewEvent from './components/NewEvent';
 import EventCreated from './components/EventCreated';
 
@@ -20,7 +18,6 @@ export default {
   components: {
     pageHeader,
     Chart,
-    Event,
     NewEvent,
     EventCreated,
   },
