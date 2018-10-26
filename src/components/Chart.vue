@@ -44,6 +44,7 @@
           </div>
         </div>
       </div>
+      <event></event>
     </section>
   </main>
 </template>
@@ -51,6 +52,7 @@
 <script>
   import moment from 'moment';
   import Timeline from './Timeline';
+  import Event from './Event';
 
   export default {
     name: 'Chart',
@@ -107,6 +109,7 @@
             ],
           },
         ],
+        currentTarget: null,
       };
     },
     methods: {
@@ -144,10 +147,18 @@
         return (startTime.slice(0, 2) * 67.2) - 470.4;
       },
       showEventPopup(event, eventInfo) {
-        this.$store.commit('setEventModal', true);
-        this.$store.commit('setCoordX', event.clientX);
-        this.$store.commit('setCoordY', event.clientY);
-        this.$store.commit('setCurrentEvent', eventInfo);
+        if (this.$store.getters.getEventModal && event.target === this.currentTarget) {
+          this.currentTarget = null;
+          console.log('work');
+          this.$store.commit('setEventModal', false);
+        } else {
+          this.currentTarget = event.target;
+          const coords = event.target.getBoundingClientRect();
+          this.$store.commit('setEventModal', true);
+          this.$store.commit('setCoordX', coords.x);
+          this.$store.commit('setCoordY', coords.y);
+          this.$store.commit('setCurrentEvent', eventInfo);
+        }
       },
     },
     computed: {
@@ -161,6 +172,7 @@
     },
     components: {
       Timeline,
+      Event,
     },
   };
 </script>
@@ -178,6 +190,7 @@
   .chart {
     overflow-x: scroll;
     overflow-y: hidden;
+    position: relative;
     z-index: 1;
 
     &::-webkit-scrollbar-track {
