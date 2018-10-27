@@ -29,6 +29,7 @@
                   left: getLeftPosition(taken) + 'px'
                  }"
                  @click="showEventPopup($event, taken)">
+              <event></event>
             </div>
           </div>
           <div class="room__inner"
@@ -44,7 +45,6 @@
           </div>
         </div>
       </div>
-      <event></event>
     </section>
   </main>
 </template>
@@ -152,10 +152,7 @@
           this.$store.commit('setEventModal', false);
         } else {
           this.currentTarget = event.target;
-          const coords = event.target.getBoundingClientRect();
           this.$store.commit('setEventModal', true);
-          this.$store.commit('setCoordX', coords.x);
-          this.$store.commit('setCoordY', coords.y);
           this.$store.commit('setCurrentEvent', eventInfo);
         }
       },
@@ -372,7 +369,7 @@
         left: 50px;
         top: 0;
         background-color: #d5dfe9;
-        z-index: 1;
+        z-index: 6;
         cursor: pointer;
 
         &:hover {

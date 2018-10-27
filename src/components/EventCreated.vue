@@ -77,9 +77,10 @@
     }
 
     &__inner {
-      background-image: url("../../static/img/emoji2.svg");
+      background-image: url("../../static/img/icon-event.svg");
       background-repeat: no-repeat;
       background-position: center 25px;
+      background-size: 50px 50px;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;

@@ -1,6 +1,6 @@
 <template>
   <section class="event" :class="{'event--opened': isOpened}"
-           :style="{left: getLeftPosition + 'px', top: getTopPosition + 'px'}">
+           :style="{left: getLeftPosition, top: getTopPosition}">
     <div class="event__inner" v-if="getCurrentEvent != null">
       <div class="event__heading">
         <span class="event__title">{{getCurrentEvent.theme}}</span>
@@ -22,7 +22,7 @@
           <img src="../../static/img/faces/spider-man.jpg"
                alt="Дарт Вейдер"
                class="event__img">
-          <span class="event__name">Дарт Вейдер</span>
+          <span class="event__name">Вы</span>
         </span>&nbsp;и&nbsp;
         <span class="event__count">{{getMembersCount}}</span>
         &nbsp;{{getCorrectEnding(getMembersCount, ['участник', 'участника', 'участников'])}}
@@ -49,10 +49,10 @@
         return this.$store.getters.getEventModal;
       },
       getLeftPosition() {
-        return this.$store.getters.getCoordX - 130;
+        return `${-172}px`;
       },
       getTopPosition() {
-        return this.$store.getters.getCoordY - 30;
+        return `${36}px`;
       },
       getCurrentEvent() {
         return this.$store.getters.getCurrentEvent;
@@ -74,10 +74,10 @@
     position: absolute;
     display: none;
     padding: 20px 16px;
-    max-width: 360px;
+    width: 360px;
     box-shadow: 0 1px 16px 0;
     border-radius: 8px;
-    z-index: 3;
+    z-index: 6;
     background-color: #ffffff;
 
     &--opened {
