@@ -23,13 +23,19 @@
       <div class="event-form__block event-form__block--mb event-form__block--flex">
         <div class="event-form__wrapper">
           <label for="date" class="event-form__label">Дата и время</label>
-          <input type="date" class="event-form__input" id="date"
-                 name="date"
-                 placeholder="Дата встречи"
-                 :value="getSelectedDate"
-                 @input="changeSelectedDate"
-                 :min="getCurrentDate"
-                 required>
+          <datepicker :language="language"
+                      :id="'date'"
+                      :value="getSelectedDate"
+                      @input="changeSelectedDate"
+                      :monday-first="true"
+                      placeholder="Дата встречи"
+                      :input-class="'event-form__input'"
+                      :calendar-class="'event-form__calendar'"
+                      :format="customFormatter"
+                      :highlighted="{
+                    days: [6, 0],
+                  }">
+          </datepicker>
         </div>
         <span class="event-form__error event-form__error--width">
           {{dateValidation}}
@@ -130,10 +136,13 @@
 <script>
   import Vue from 'vue';
   import moment from 'moment';
+  import Datepicker from 'vuejs-datepicker';
+  import { ru } from 'vuejs-datepicker/dist/locale';
 
   export default {
     data() {
       return {
+        language: ru,
         selectedMembers: [],
         isThemeValid: false,
         isDateValid: false,
@@ -163,9 +172,9 @@
         return this.$store.getters.getCurrentFloor;
       },
       getSelectedDate() {
+        moment.locale('ru');
         const now = this.$store.getters.getSelectedDate;
-        return moment(now)
-          .format('YYYY-MM-DD');
+        return moment(now).format('YYYY-MM-DD');
       },
       getStartTime() {
         return this.$store.getters.getStartTime;
@@ -260,6 +269,10 @@
       },
     },
     methods: {
+      customFormatter(date) {
+        moment.locale('ru');
+        return moment(date).format('YYYY-MM-DD');
+      },
       endTimeKeyPressed(e) {
         if (this.endTime.length > 4) {
           e.target.value = this.endTime.slice(0, 4);
@@ -276,8 +289,8 @@
       setSelectedMembers(value) {
         this.$store.commit('setSelectedMembers', value);
       },
-      changeSelectedDate(event) {
-        this.$store.commit('setSelectedDate', event.target.value);
+      changeSelectedDate(value) {
+        this.$store.commit('setSelectedDate', value);
       },
       deleteSelectedMember(name) {
         Object.entries(this.selectedMembers)
@@ -322,6 +335,9 @@
           this.id += 1;
         }
       },
+    },
+    components: {
+      Datepicker,
     },
   };
 </script>
@@ -429,6 +445,34 @@
 
       &--bottom {
         top: 140px;
+      }
+    }
+
+    &__calendar {
+      left: -6px;
+      top: 55px;
+
+      & .cell.highlighted {
+        color: red;
+        background-color: transparent;
+      }
+
+      & .cell.selected,
+      & .cell.selected.highlighted {
+        background-color: #0070E0;
+        color: #ffffff;
+
+        &:hover {
+          background-color: #0070E0;
+          color: #ffffff;
+        }
+      }
+
+      & .cell {
+        &:hover {
+          color: #0070E0;
+          border: 1px solid #0070E0 !important;
+        }
       }
     }
 

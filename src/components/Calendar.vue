@@ -14,6 +14,7 @@
                   :input-class="'calendar__datepicker'"
                   :calendar-class="'calendar__calendar'"
                   :format="customFormatter"
+                  @input="setSelectedDate"
                   :highlighted="{
                     days: [6, 0],
                   }">
@@ -59,6 +60,9 @@
         const result = this.now || new Date();
         result.setDate(result.getDate() - 1);
         this.now = new Date(result);
+        this.$store.commit('setSelectedDate', this.now);
+      },
+      setSelectedDate() {
         this.$store.commit('setSelectedDate', this.now);
       },
     },
