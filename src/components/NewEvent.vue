@@ -2,12 +2,15 @@
   <section class="event-form"
            :class="{'event-form--opened' : isModalOpened}">
     <form method="#" class="event-form__form" @submit.prevent="submitRoom">
-      <span class="event-form__title" v-if="!getEditState">
+      <div class="event-form__box">
+        <span class="event-form__title" v-if="!getEditState">
       Новая встреча
       </span>
-      <span class="event-form__title" v-else>
+        <span class="event-form__title" v-else>
       Редактирование встречи
       </span>
+        <button type="reset">Очистить форму</button>
+      </div>
       <div class="event-form__block event-form__block--mr">
         <label for="theme" class="event-form__label">Тема</label>
         <input type="text" class="event-form__input"
@@ -127,6 +130,9 @@
                 :class="{'event-form__btn--disabled': !isFormValid}"
                 :disabled="!isFormValid">
           Создать встречу
+        </button>
+        <button class="event-form__btn btn" type="button" v-if="getEditState">
+          Удалить встречу
         </button>
       </div>
     </form>
@@ -440,6 +446,13 @@
       background-color: #e9ecef;
     }
 
+    &__box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
     &__error {
       position: absolute;
       top: 74px;
@@ -537,6 +550,10 @@
 
       &--width {
         min-width: 238px;
+        background-image: url("../../static/img/calendar.svg");
+        background-size: 10px 10px;
+        background-repeat: no-repeat;
+        background-position: 95% center;
       }
 
       &:focus,
@@ -707,7 +724,7 @@
       }
 
       &__block {
-        min-width: 352px;
+        width: 352px;
         max-width: 100%;
 
         &--mr {
