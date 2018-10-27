@@ -24,6 +24,12 @@
     },
     methods: {
       openNewEventModal() {
+        this.$store.commit('setCurrentTheme', null);
+        this.$store.commit('setCurrentRoom', null);
+        this.$store.commit('setEndTime', null);
+        this.$store.commit('setStartTime', null);
+        this.$store.commit('setCurrentFloor', null);
+        this.$store.commit('clearSelectedMembers');
         this.$store.commit('setNewEventModal', true);
       },
     },

@@ -119,6 +119,8 @@
       },
       openNewEventModal(event) {
         this.$store.commit('setNewEventModal', true);
+        this.$store.commit('setCurrentTheme', null);
+        this.$store.commit('clearSelectedMembers');
         this.$store.commit('setCurrentRoom', event.target.dataset.room);
         if (event.target.dataset.start < 10) {
           this.$store.commit('setStartTime', `0${event.target.dataset.start}:00`);

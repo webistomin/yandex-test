@@ -78,6 +78,9 @@ export default {
         },
       );
     },
+    clearSelectedMembers(state) {
+      state.selectedMembers = {};
+    },
     setCurrentTheme(state, payload) {
       state.currentTheme = payload;
     },

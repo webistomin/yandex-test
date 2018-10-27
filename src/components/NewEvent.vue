@@ -6,7 +6,7 @@
       Новая встреча
       </span>
       <span class="event-form__title" v-else>
-      Редактировать встречу
+      Редактирование встречи
       </span>
       <div class="event-form__block event-form__block--mr">
         <label for="theme" class="event-form__label">Тема</label>
@@ -29,7 +29,7 @@
                       @input="changeSelectedDate"
                       :monday-first="true"
                       placeholder="Дата встречи"
-                      :input-class="'event-form__input'"
+                      :input-class="'event-form__input event-form__input--width'"
                       :calendar-class="'event-form__calendar'"
                       :format="customFormatter"
                       :highlighted="{
@@ -172,9 +172,8 @@
         return this.$store.getters.getCurrentFloor;
       },
       getSelectedDate() {
-        moment.locale('ru');
-        const now = this.$store.getters.getSelectedDate;
-        return moment(now).format('YYYY-MM-DD');
+        const date = this.$store.getters.getSelectedDate;
+        return moment(date).format('YYYY-MM-DD');
       },
       getStartTime() {
         return this.$store.getters.getStartTime;
@@ -248,7 +247,13 @@
           return 'Начало должно быть раньше конца';
         } else if (this.startTime <= String(new Date().getHours())) {
           this.isTimeValid = false;
-          return 'Неверное время';
+          return 'Время уже прошло';
+        } else if (this.startTime < '07:00') {
+          this.isTimeValid = false;
+          return 'Переговорки доступны с 7:00';
+        } else if (this.endTime > '23:59') {
+          this.isTimeValid = false;
+          return 'Переговорки доступны до 23:59';
         } else if (!reg.test(this.startTime) || !reg.test(this.endTime)) {
           this.isTimeValid = false;
           return 'Введите время в формате ЧЧ:ММ';
@@ -271,7 +276,7 @@
     methods: {
       customFormatter(date) {
         moment.locale('ru');
-        return moment(date).format('YYYY-MM-DD');
+        return moment(date).format('LL');
       },
       endTimeKeyPressed(e) {
         if (this.endTime.length > 4) {
@@ -529,6 +534,10 @@
       color: #000000;
       border: 2px solid #e9ecef;
       border-radius: 4px;
+
+      &--width {
+        min-width: 238px;
+      }
 
       &:focus,
       &:hover {
