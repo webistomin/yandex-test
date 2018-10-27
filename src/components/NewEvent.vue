@@ -132,6 +132,7 @@
         isDateValid: false,
         isTimeValid: false,
         isMembersValid: false,
+        id: 0,
       };
     },
     name: 'NewEvent',
@@ -261,6 +262,7 @@
       },
       submitRoom() {
         this.$store.commit('setNewEvent', {
+          id: this.id,
           floor: this.getCurrentFloor,
           room: this.getCurrentRoom,
           theme: this.currentTheme,
@@ -271,6 +273,7 @@
         });
         this.$store.commit('setNewEventModal', false);
         this.$store.commit('setEventCreatedModal', true);
+        this.id += 1;
       },
     },
   };

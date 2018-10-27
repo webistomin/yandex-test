@@ -4,7 +4,7 @@
     <div class="event__inner" v-if="getCurrentEvent != null">
       <div class="event__heading">
         <span class="event__title">{{getCurrentEvent.theme}}</span>
-        <button class="event__btn">Редактировать
+        <button class="event__btn" @click="editSelectedEvent">Редактировать
           <svg width="12" height="12" class="event__icon">
             <use x="0" y="0" xlink:href="#icon-pen"></use>
           </svg>
@@ -43,6 +43,12 @@
           2 :
           cases[(number % 10 < 5) ? number % 10 : 5]];
       },
+      editSelectedEvent() {
+        const currentEvent = this.getCurrentEvent;
+        const events = this.getEventsList;
+        console.log(events.indexOf(events.find(obj => obj.id === `${currentEvent.id}}`)));
+        this.$store.commit('setNewEventModal', true);
+      },
     },
     computed: {
       isOpened() {
@@ -64,6 +70,9 @@
       },
       getMembersCount() {
         return Object.keys(this.getCurrentEvent.members).length;
+      },
+      getEventsList() {
+        return this.$store.getters.getEventsList;
       },
     },
   };

@@ -22,14 +22,14 @@
                  @click="openNewEventModal($event)">
             </div>
             <div class="room__cell--taken"
-                 v-for="taken of getEventsList"
+                 v-for="(taken, index) of getEventsList"
                  v-if="taken.room === roomData.roomName && taken.date === getSelectedDate"
                  :style="{
                   width: getWidth(taken) + 'px',
                   left: getLeftPosition(taken) + 'px'
                  }"
-                 @click="showEventPopup($event, taken)">
-              <event></event>
+                 @click="showEventPopup($event, taken, index)">
+              <event v-if="clicked[index]"></event>
             </div>
           </div>
           <div class="room__inner"
@@ -58,6 +58,7 @@
     name: 'Chart',
     data() {
       return {
+        clicked: {},
         isScrolled: false,
         windowSize: window.screen.width,
         rooms: [
@@ -146,11 +147,17 @@
         }
         return (startTime.slice(0, 2) * 67.2) - 470.4;
       },
-      showEventPopup(event, eventInfo) {
+      showEventPopup(event, eventInfo, index) {
+        if (Object.prototype.hasOwnProperty.call(this.clicked, index)) {
+          this.$set(this.clicked, index, !this.clicked[index]);
+        } else {
+          this.$set(this.clicked, index, true);
+        }
         if (this.$store.getters.getEventModal && event.target === this.currentTarget) {
           this.currentTarget = null;
           this.$store.commit('setEventModal', false);
         } else {
+          this.$set(this.clicked, index, true);
           this.currentTarget = event.target;
           this.$store.commit('setEventModal', true);
           this.$store.commit('setCurrentEvent', eventInfo);
@@ -164,6 +171,9 @@
       getSelectedDate() {
         const date = this.$store.getters.getSelectedDate;
         return moment(date).format('YYYY-MM-DD');
+      },
+      getCurrentEvent() {
+        return this.$store.getters.getCurrentEvent;
       },
     },
     components: {
