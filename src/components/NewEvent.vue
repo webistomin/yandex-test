@@ -2,8 +2,11 @@
   <section class="event-form"
            :class="{'event-form--opened' : isModalOpened}">
     <form method="#" class="event-form__form" @submit.prevent="submitRoom">
-      <span class="event-form__title">
+      <span class="event-form__title" v-if="!getEditState">
       Новая встреча
+      </span>
+      <span class="event-form__title" v-else>
+      Редактировать встречу
       </span>
       <div class="event-form__block event-form__block--mr">
         <label for="theme" class="event-form__label">Тема</label>
@@ -33,18 +36,22 @@
         </span>
         <div class="event-form__inner">
           <label for="start" class="event-form__label event-form__label--hidden">Начало</label>
-          <input type="time" class="event-form__input"
-                 id="start" placeholder="Начало встречи"
+          <input type="text" class="event-form__input"
+                 id="start" placeholder="00:00"
                  v-model="startTime"
                  name="start"
-                 min="07:00:00" max="23:00:00">
+                 pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                 required
+                 @keypress="startTimeKeyPressed($event)">
           <span class="event-form__dash">–</span>
           <label for="end" class="event-form__label event-form__label--hidden">Конец</label>
-          <input type="time" class="event-form__input" id="end"
-                 placeholder="Конец встречи"
+          <input type="text" class="event-form__input" id="end"
+                 placeholder="00:00"
                  v-model="endTime"
                  name="end"
-                 min="07:01:00" max="23:59:59">
+                 pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                 required
+                 @keypress="endTimeKeyPressed($event)">
           <span class="event-form__error event-form__error--bottom">
           {{timeValidation}}
           </span>
@@ -226,9 +233,16 @@
         return '';
       },
       timeValidation() {
+        const reg = /([01]?[0-9]|2[0-3]):[0-5][0-9]/;
         if (this.endTime <= this.startTime) {
           this.isTimeValid = false;
           return 'Начало должно быть раньше конца';
+        } else if (this.startTime <= String(new Date().getHours())) {
+          this.isTimeValid = false;
+          return 'Неверное время';
+        } else if (!reg.test(this.startTime) || !reg.test(this.endTime)) {
+          this.isTimeValid = false;
+          return 'Введите время в формате ЧЧ:ММ';
         }
         this.isTimeValid = true;
         return '';
@@ -246,6 +260,16 @@
       },
     },
     methods: {
+      endTimeKeyPressed(e) {
+        if (this.endTime.length > 4) {
+          e.target.value = this.endTime.slice(0, 4);
+        }
+      },
+      startTimeKeyPressed(e) {
+        if (this.startTime.length > 4) {
+          e.target.value = this.startTime.slice(0, 4);
+        }
+      },
       closeNewEventModal() {
         this.$store.commit('setNewEventModal', false);
       },
@@ -278,6 +302,8 @@
             endTime: this.getEndTime,
             members: this.getSelectedMembers,
           });
+          this.$store.commit('setEdit', false);
+          this.$store.commit('setEditIndex', null);
           this.$store.commit('setNewEventModal', false);
           this.$store.commit('setEventCreatedModal', true);
         } else {
