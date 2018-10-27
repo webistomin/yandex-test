@@ -340,7 +340,7 @@
       height: 58px;
       cursor: pointer;
       position: relative;
-      z-index: 1;
+      /*z-index: 1;*/
 
       &::before,
       &::after {
@@ -379,7 +379,7 @@
         left: 50px;
         top: 0;
         background-color: #d5dfe9;
-        z-index: 6;
+        /*z-index: 6;*/
         cursor: pointer;
 
         &:hover {

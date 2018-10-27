@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 export default {
   state: {
     eventsList: [],
@@ -5,8 +7,16 @@ export default {
     selectedDate: new Date(),
     isOpenedNewEventModal: false,
     isOpenedEventCreatedModal: false,
+    isEdit: false,
+    editIndex: null,
   },
   mutations: {
+    setEdit(state, payload) {
+      state.isEdit = payload;
+    },
+    setEditIndex(state, payload) {
+      state.editIndex = payload;
+    },
     setDate(state, payload) {
       state.now = payload;
     },
@@ -21,6 +31,9 @@ export default {
     },
     setNewEvent(state, payload) {
       state.eventsList.push(payload);
+    },
+    updateEvent(state, payload) {
+      Vue.set(state.eventsList, state.editIndex, payload);
     },
   },
   getters: {
@@ -38,6 +51,12 @@ export default {
     },
     getEventsList(state) {
       return state.eventsList;
+    },
+    getEditState(state) {
+      return state.isEdit;
+    },
+    getEditIndex(state) {
+      return state.editIndex;
     },
   },
 };

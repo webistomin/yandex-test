@@ -46,7 +46,16 @@
       editSelectedEvent() {
         const currentEvent = this.getCurrentEvent;
         const events = this.getEventsList;
-        console.log(events.indexOf(events.find(obj => obj.id === `${currentEvent.id}}`)));
+        const index = events.indexOf(events.find(obj => obj.id === currentEvent.id));
+        this.$store.commit('setEdit', true);
+        this.$store.commit('setEditIndex', index);
+        this.$store.commit('setCurrentRoom', currentEvent.room);
+        this.$store.commit('setStartTime', currentEvent.startTime);
+        this.$store.commit('setEndTime', currentEvent.endTime);
+        this.$store.commit('setCurrentFloor', currentEvent.floor);
+        this.$store.commit('setSelectedMembers', currentEvent.members);
+        this.$store.commit('setCurrentTheme', currentEvent.theme);
+        this.$store.commit('setSelectedDate', currentEvent.date);
         this.$store.commit('setNewEventModal', true);
       },
     },

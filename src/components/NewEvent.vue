@@ -137,6 +137,12 @@
     },
     name: 'NewEvent',
     computed: {
+      getEditIndex() {
+        return this.$store.getters.getEditIndex;
+      },
+      getEditState() {
+        return this.$store.getters.getEditState;
+      },
       isModalOpened() {
         return this.$store.getters.getNewEventModal;
       },
@@ -261,19 +267,34 @@
         this.$store.commit('deleteSelectedMember', name);
       },
       submitRoom() {
-        this.$store.commit('setNewEvent', {
-          id: this.id,
-          floor: this.getCurrentFloor,
-          room: this.getCurrentRoom,
-          theme: this.currentTheme,
-          date: this.getSelectedDate,
-          startTime: this.getStartTime,
-          endTime: this.getEndTime,
-          members: this.getSelectedMembers,
-        });
-        this.$store.commit('setNewEventModal', false);
-        this.$store.commit('setEventCreatedModal', true);
-        this.id += 1;
+        if (this.getEditState) {
+          this.$store.commit('updateEvent', {
+            id: this.$store.getters.getCurrentEvent.id,
+            floor: this.getCurrentFloor,
+            room: this.getCurrentRoom,
+            theme: this.currentTheme,
+            date: this.getSelectedDate,
+            startTime: this.getStartTime,
+            endTime: this.getEndTime,
+            members: this.getSelectedMembers,
+          });
+          this.$store.commit('setNewEventModal', false);
+          this.$store.commit('setEventCreatedModal', true);
+        } else {
+          this.$store.commit('setNewEvent', {
+            id: this.id,
+            floor: this.getCurrentFloor,
+            room: this.getCurrentRoom,
+            theme: this.currentTheme,
+            date: this.getSelectedDate,
+            startTime: this.getStartTime,
+            endTime: this.getEndTime,
+            members: this.getSelectedMembers,
+          });
+          this.$store.commit('setNewEventModal', false);
+          this.$store.commit('setEventCreatedModal', true);
+          this.id += 1;
+        }
       },
     },
   };
