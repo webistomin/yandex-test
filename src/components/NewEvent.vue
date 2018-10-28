@@ -140,14 +140,14 @@
         <button class="event-form__btn event-form__btn--grey btn" type="button"
                 @click="closeNewEventModal">Отмена
         </button>
+        <button class="event-form__btn btn" type="button" v-if="getEditState"
+                @click="setEventDeleteModal">
+          Удалить встречу
+        </button>
         <button class="event-form__btn btn" type="submit"
                 :class="{'event-form__btn--disabled': !isFormValid}"
                 :disabled="!isFormValid">
           Создать встречу
-        </button>
-        <button class="event-form__btn btn" type="button" v-if="getEditState"
-                @click="setEventDeleteModal">
-          Удалить встречу
         </button>
       </div>
     </form>
@@ -340,23 +340,26 @@
       },
       membersValidation() {
         let counter = null;
-        // eslint-disable-next-line max-len
-        const floorIndex = this.rooms.indexOf(this.rooms.find(obj => obj.id === +this.getCurrentFloor));
-        // eslint-disable-next-line max-len
-        const roomIndex = this.rooms[floorIndex].roomList.indexOf(this.rooms[floorIndex].roomList.find(room => room.roomName === this.getCurrentRoom));
-        const roomCount = this.rooms[floorIndex].roomList[roomIndex].roomCount;
-        console.log(roomCount);
-        if (roomCount === '3 – 6 человек') {
-          counter = 6;
-        } else {
-          counter = 10;
+        if (this.getCurrentRoom) {
+          // eslint-disable-next-line max-len
+          const floorIndex = this.rooms.indexOf(this.rooms.find(obj => obj.id === +this.getCurrentFloor));
+          // eslint-disable-next-line max-len
+          const roomIndex = this.rooms[floorIndex].roomList.indexOf(this.rooms[floorIndex].roomList.find(room => room.roomName === this.getCurrentRoom));
+          const roomCount = this.rooms[floorIndex].roomList[roomIndex].roomCount;
+          if (roomCount === '3 – 6 человек') {
+            counter = 6;
+          } else {
+            counter = 10;
+          }
         }
         if (this.selectedMembers.length === 0) {
           this.isMembersValid = false;
           return 'Нужно выбрать хотя бы одного участника';
-        } else if (this.selectedMembers.length > counter) {
-          this.isMembersValid = false;
-          return `Превышен лимит комнаты. Максимум ${counter} человек`;
+        } else if (this.getCurrentRoom) {
+          if (this.selectedMembers.length > counter) {
+            this.isMembersValid = false;
+            return `Превышен лимит комнаты. Максимум ${counter} человек`;
+          }
         }
         this.isMembersValid = true;
         return '';
