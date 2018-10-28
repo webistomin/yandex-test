@@ -30,6 +30,8 @@
         this.$store.commit('deleteCurrentEvent');
         this.setEventDeleteModal();
         this.$store.commit('setNewEventModal', false);
+        this.$store.commit('setEdit', false);
+        this.$store.commit('setEditIndex', null);
       },
     },
     computed: {

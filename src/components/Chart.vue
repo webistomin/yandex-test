@@ -150,19 +150,17 @@
         return (startTime.slice(0, 2) * 67.2) - 470.4;
       },
       showEventPopup(event, eventInfo, index) {
-        if (Object.prototype.hasOwnProperty.call(this.clicked, index)) {
-          this.$set(this.clicked, index, !this.clicked[index]);
-        } else {
-          this.$set(this.clicked, index, true);
-        }
         if (this.$store.getters.getEventModal && event.target === this.currentTarget) {
           this.currentTarget = null;
           this.$store.commit('setEventModal', false);
+          this.clicked = [];
+          this.$set(this.clicked, index, !this.clicked[index]);
         } else {
-          this.$set(this.clicked, index, true);
           this.currentTarget = event.target;
           this.$store.commit('setEventModal', true);
           this.$store.commit('setCurrentEvent', eventInfo);
+          this.clicked = [];
+          this.$set(this.clicked, index, true);
         }
       },
     },
@@ -237,7 +235,7 @@
       background: rgba(73, 76, 83, 0.02);
       box-shadow: 0 1px 0 0 #e9ecef;
 
-      &--shadow {
+      &:first-of-type {
         box-shadow: 0 -1px 0 0 #e9ecef,
         0 1px 0 0 #e9ecef;
       }
@@ -276,13 +274,13 @@
         z-index: 1;
         position: relative;
 
-        &--shadow {
-          box-shadow: 0 -1px 0 0 #e9ecef;
+        &:first-of-type {
+          box-shadow: none;
         }
       }
 
       &__block {
-        width: 246px;
+        width: 245px;
         position: sticky;
         left: 0;
         background-color: #ffffff;

@@ -186,11 +186,12 @@
     }
 
     @media (min-width: 1366px) {
-      padding: 17px 0 16px 0;
+      padding: 16px 0 16px 0;
       padding-left: 289px;
       background-color: #ffffff;
       width: 1387px;
       box-sizing: border-box;
+      box-shadow: 0 1px 0 0 #e9ecef;
 
       &__time {
         &::before {

@@ -308,6 +308,8 @@
       },
       closeNewEventModal() {
         this.$store.commit('setNewEventModal', false);
+        this.$store.commit('setEdit', false);
+        this.$store.commit('setEditIndex', null);
       },
       setSelectedMembers(value) {
         this.$store.commit('setSelectedMembers', value);

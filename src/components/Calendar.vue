@@ -189,7 +189,7 @@
       box-sizing: border-box;
       width: 245px;
       padding: 10px 24px 11px 24px;
-      box-shadow: 0 -1px 0 0 #e9ecef;
+      box-shadow: 1px 1px 0 0 #e9ecef;
       z-index: 2;
       background-color: #ffffff;
       position: relative;
