@@ -1,7 +1,9 @@
 <template>
   <section class="event-form"
            :class="{'event-form--opened' : isModalOpened}">
-    <form method="#" class="event-form__form" @submit.prevent="submitRoom">
+    <form method="#" class="event-form__form"
+          @submit.prevent="submitRoom"
+          autocomplete="off">
       <div class="event-form__box">
         <span class="event-form__title" v-if="!getEditState">
       Новая встреча
@@ -115,7 +117,7 @@
       </div>
       <div class="event-form__block">
         <span class="event-form__label">Выбранная переговорка</span>
-        <ul class="event-form__rooms">
+        <ul class="event-form__rooms" v-if="getCurrentFloor">
           <li class="event-form__room event-form__room--selected">
             <div class="event-form__duration">
               <time class="event-form__time">{{startTime}}</time>
@@ -126,6 +128,12 @@
             &nbsp;•&nbsp;
             <span class="event-form__floor">{{getCurrentFloor}} этаж</span>
           </li>
+        </ul>
+        <ul class="event-form__rooms" v-else>
+          <li>Комната 1</li>
+          <li>Комната 1</li>
+          <li>Комната 1</li>
+          <li>Комната 1</li>
         </ul>
       </div>
       <div class="event-form__actions">
@@ -164,6 +172,55 @@
         isTimeValid: false,
         isMembersValid: false,
         id: 0,
+        rooms: [
+          {
+            id: 7,
+            floor: 7,
+            roomList: [
+              {
+                roomName: 'Ржавый Фред',
+                roomCount: '3 – 6 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Прачечная',
+                roomCount: 'до 10 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Желтый дом',
+                roomCount: 'до 10 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Оранжевый Тюльпан',
+                roomCount: '3 – 6 человек',
+                isFull: false,
+              },
+            ],
+          },
+          {
+            id: 6,
+            floor: 6,
+            roomList: [
+              {
+                roomName: 'Джокер',
+                roomCount: '3 – 6 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Мариванна',
+                roomCount: 'до 10 человек',
+                isFull: false,
+              },
+              {
+                roomName: 'Тонкий Боб',
+                roomCount: 'до 10 человек',
+                isFull: false,
+              },
+            ],
+          },
+        ],
       };
     },
     name: 'NewEvent',
@@ -282,9 +339,24 @@
         return '';
       },
       membersValidation() {
+        let counter = null;
+        // eslint-disable-next-line max-len
+        const floorIndex = this.rooms.indexOf(this.rooms.find(obj => obj.id === +this.getCurrentFloor));
+        // eslint-disable-next-line max-len
+        const roomIndex = this.rooms[floorIndex].roomList.indexOf(this.rooms[floorIndex].roomList.find(room => room.roomName === this.getCurrentRoom));
+        const roomCount = this.rooms[floorIndex].roomList[roomIndex].roomCount;
+        console.log(roomCount);
+        if (roomCount === '3 – 6 человек') {
+          counter = 6;
+        } else {
+          counter = 10;
+        }
         if (this.selectedMembers.length === 0) {
           this.isMembersValid = false;
           return 'Нужно выбрать хотя бы одного участника';
+        } else if (this.selectedMembers.length > counter) {
+          this.isMembersValid = false;
+          return `Превышен лимит комнаты. Максимум ${counter} человек`;
         }
         this.isMembersValid = true;
         return '';
