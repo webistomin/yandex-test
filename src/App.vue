@@ -2,8 +2,8 @@
   <div id="app">
     <page-header></page-header>
     <chart></chart>
-    <new-event></new-event>
-    <event-created></event-created>
+    <new-event v-if="getNewEventModal"></new-event>
+    <event-created v-if="getEventCreatedModal"></event-created>
   </div>
 </template>
 
@@ -23,6 +23,14 @@ export default {
   },
   mounted() {
     setInterval(() => { this.$store.commit('setDate', new Date()); }, 1000 * 60);
+  },
+  computed: {
+    getNewEventModal() {
+      return this.$store.getters.getNewEventModal;
+    },
+    getEventCreatedModal() {
+      return this.$store.getters.getEventCreatedModal;
+    },
   },
 };
 </script>

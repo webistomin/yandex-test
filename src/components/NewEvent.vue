@@ -81,7 +81,7 @@
                   multiple
                   :max-height="'136px'"
                   :placeholder="'Например, Тор Одинович'">
-          <span slot="no-options">Нет участников :(</span>
+          <span slot="no-options">Нет участников 😖</span>
           <template slot="option" slot-scope="option">
             <img :src="`../../static/img/faces/${option.avatar}.jpg`"
                  :alt="option.name"
@@ -167,6 +167,11 @@
       };
     },
     name: 'NewEvent',
+    mounted() {
+      if (this.getEditState) {
+        this.selectedMembers = Object.values(this.getSelectedMembers);
+      }
+    },
     computed: {
       getEditIndex() {
         return this.$store.getters.getEditIndex;
@@ -310,6 +315,7 @@
         this.$store.commit('setNewEventModal', false);
         this.$store.commit('setEdit', false);
         this.$store.commit('setEditIndex', null);
+        this.selectedMembers = [];
       },
       setSelectedMembers(value) {
         this.$store.commit('setSelectedMembers', value);
@@ -330,7 +336,7 @@
       },
       submitRoom() {
         if (this.getEditState) {
-          this.$store.commit('updateEvent', {
+          const eventObj = {
             id: this.$store.getters.getCurrentEvent.id,
             floor: this.getCurrentFloor,
             room: this.getCurrentRoom,
@@ -339,13 +345,15 @@
             startTime: this.getStartTime,
             endTime: this.getEndTime,
             members: this.getSelectedMembers,
-          });
+          };
+          this.$store.commit('updateEvent', eventObj);
           this.$store.commit('setEdit', false);
           this.$store.commit('setEditIndex', null);
           this.$store.commit('setNewEventModal', false);
           this.$store.commit('setEventCreatedModal', true);
+          this.$store.commit('setCurrentEvent', eventObj);
         } else {
-          this.$store.commit('setNewEvent', {
+          const eventObj = {
             id: this.id,
             floor: this.getCurrentFloor,
             room: this.getCurrentRoom,
@@ -354,10 +362,12 @@
             startTime: this.getStartTime,
             endTime: this.getEndTime,
             members: this.getSelectedMembers,
-          });
+          };
+          this.$store.commit('setNewEvent', eventObj);
           this.$store.commit('setNewEventModal', false);
           this.$store.commit('setEventCreatedModal', true);
           this.id += 1;
+          this.selectedMembers = [];
         }
       },
     },
