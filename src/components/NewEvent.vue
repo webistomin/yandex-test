@@ -52,23 +52,27 @@
           {{dateValidation}}
         </span>
         <div class="event-form__inner">
-          <label for="start" class="event-form__label event-form__label--hidden">Начало</label>
-          <input type="text" class="event-form__input"
-                 id="start" placeholder="00:00"
-                 v-model="startTime"
-                 name="start"
-                 pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
-                 required
-                 @keypress="startTimeKeyPressed($event)">
+          <div class="event-form__holder">
+            <label for="start" class="event-form__label event-form__label--hidden">Начало</label>
+            <input type="text" class="event-form__input"
+                   id="start" placeholder="00:00"
+                   v-model="startTime"
+                   name="start"
+                   pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                   required
+                   @keypress="startTimeKeyPressed($event)">
+          </div>
           <span class="event-form__dash">–</span>
-          <label for="end" class="event-form__label event-form__label--hidden">Конец</label>
-          <input type="text" class="event-form__input" id="end"
-                 placeholder="00:00"
-                 v-model="endTime"
-                 name="end"
-                 pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
-                 required
-                 @keypress="endTimeKeyPressed($event)">
+          <div class="event-form__holder">
+            <label for="end" class="event-form__label event-form__label--hidden">Конец</label>
+            <input type="text" class="event-form__input" id="end"
+                   placeholder="00:00"
+                   v-model="endTime"
+                   name="end"
+                   pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]"
+                   required
+                   @keypress="endTimeKeyPressed($event)">
+          </div>
           <span class="event-form__error event-form__error--bottom">
           {{timeValidation}}
           </span>
@@ -911,8 +915,13 @@
       &::after {
         display: none;
       }
-
       padding-bottom: 50px;
+
+      &__label {
+        &--hidden {
+          display: block;
+        }
+      }
 
       &__error {
         font-size: 13px;
@@ -951,6 +960,10 @@
         &--grey {
           width: 80px;
         }
+      }
+
+      &__dash {
+        padding-top: 18px;
       }
     }
 
