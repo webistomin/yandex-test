@@ -137,17 +137,21 @@
       getWidth(cell) {
         const startTime = cell.startTime;
         const endTime = cell.endTime;
+        const hours = endTime.slice(0, 2) - startTime.slice(0, 2);
+        const minutes = endTime.slice(3, 5) - startTime.slice(3, 5);
         if (this.windowSize < 1366) {
-          return (endTime.slice(0, 2) - startTime.slice(0, 2)) * 67;
+          return (hours * 67) + (minutes * 1.116);
         }
-        return (endTime.slice(0, 2) - startTime.slice(0, 2)) * 67.2;
+        return (hours * 67.2) + (minutes * 1.12);
       },
       getLeftPosition(cell) {
         const startTime = cell.startTime;
+        const hours = startTime.slice(0, 2);
+        const minutes = startTime.slice(3, 5);
         if (this.window < 1366) {
-          return (startTime.slice(0, 2) * 67) - 470.4;
+          return ((hours * 67) + (minutes * 1.116)) - 470.4;
         }
-        return (startTime.slice(0, 2) * 67.2) - 470.4;
+        return ((hours * 67.2) + (minutes * 1.12)) - 470.4;
       },
       showEventPopup(event, eventInfo, index) {
         if (this.$store.getters.getEventModal && event.target === this.currentTarget) {
