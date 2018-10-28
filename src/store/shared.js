@@ -7,6 +7,7 @@ export default {
     selectedDate: new Date(),
     isOpenedNewEventModal: false,
     isOpenedEventCreatedModal: false,
+    isOpenedEventDeleteModal: false,
     isEdit: false,
     editIndex: null,
   },
@@ -29,11 +30,17 @@ export default {
     setEventCreatedModal(state, payload) {
       state.isOpenedEventCreatedModal = payload;
     },
+    setEventDeleteModal(state, payload) {
+      state.isOpenedEventDeleteModal = payload;
+    },
     setNewEvent(state, payload) {
       state.eventsList.push(payload);
     },
     updateEvent(state, payload) {
       Vue.set(state.eventsList, state.editIndex, payload);
+    },
+    deleteCurrentEvent(state) {
+      Vue.delete(state.eventsList, state.editIndex);
     },
   },
   getters: {
@@ -48,6 +55,9 @@ export default {
     },
     getEventCreatedModal(state) {
       return state.isOpenedEventCreatedModal;
+    },
+    getEventDeleteModal(state) {
+      return state.isOpenedEventDeleteModal;
     },
     getEventsList(state) {
       return state.eventsList;

@@ -9,7 +9,13 @@
         <span class="event-form__title" v-else>
       Редактирование встречи
       </span>
-        <button type="reset">Очистить форму</button>
+        <button class="event-form__button"
+                type="button"
+                @click="closeNewEventModal">Закрыть
+          <svg width="10" height="10" class="event-form__icon">
+            <use x="0" y="0" xlink:href="#icon-cross"></use>
+          </svg>
+        </button>
       </div>
       <div class="event-form__block event-form__block--mr">
         <label for="theme" class="event-form__label">Тема</label>
@@ -131,11 +137,13 @@
                 :disabled="!isFormValid">
           Создать встречу
         </button>
-        <button class="event-form__btn btn" type="button" v-if="getEditState">
+        <button class="event-form__btn btn" type="button" v-if="getEditState"
+                @click="setEventDeleteModal">
           Удалить встречу
         </button>
       </div>
     </form>
+    <event-delete></event-delete>
   </section>
 </template>
 
@@ -144,6 +152,7 @@
   import moment from 'moment';
   import Datepicker from 'vuejs-datepicker';
   import { ru } from 'vuejs-datepicker/dist/locale';
+  import EventDelete from './EventDeletePopup';
 
   export default {
     data() {
@@ -251,7 +260,7 @@
         if (this.endTime <= this.startTime) {
           this.isTimeValid = false;
           return 'Начало должно быть раньше конца';
-        } else if (this.startTime <= String(new Date().getHours())) {
+        } else if (this.startTime.slice(0, 2) < new Date().getHours()) {
           this.isTimeValid = false;
           return 'Время уже прошло';
         } else if (this.startTime < '07:00') {
@@ -280,6 +289,9 @@
       },
     },
     methods: {
+      setEventDeleteModal() {
+        this.$store.commit('setEventDeleteModal', true);
+      },
       customFormatter(date) {
         moment.locale('ru');
         return moment(date).format('LL');
@@ -349,6 +361,7 @@
     },
     components: {
       Datepicker,
+      EventDelete,
     },
   };
 </script>
@@ -451,6 +464,31 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
+    }
+
+    &__button {
+      width: 24px;
+      height: 24px;
+      background-color: #E9ECEF;
+      border-radius: 100px;
+      font-size: 0;
+
+      &:hover,
+      &:focus {
+        background-color: #f2f3f4;
+
+        & .event-form__icon {
+          fill: #000000;
+        }
+      }
+
+      &:active {
+        background-color: #98A9B9;
+      }
+    }
+
+    &__icon {
+      fill: #858e98;
     }
 
     &__error {
