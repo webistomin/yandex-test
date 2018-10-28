@@ -127,14 +127,32 @@
             <span class="event-form__name">{{getCurrentRoom}}</span>
             &nbsp;•&nbsp;
             <span class="event-form__floor">{{getCurrentFloor}} этаж</span>
+            <button class="event-form__button event-form__button--margin"
+                    type="button"
+                    v-if="getCurrentRoom != null"
+                    @click.stop="removeCurrentRoom">Закрыть
+              <svg width="10" height="10" class="event-form__icon">
+                <use x="0" y="0" xlink:href="#icon-cross"></use>
+              </svg>
+            </button>
           </li>
         </ul>
         <ul class="event-form__rooms" v-else>
-          <li>Комната 1</li>
-          <li>Комната 1</li>
-          <li>Комната 1</li>
-          <li>Комната 1</li>
+          <li class="event-form__room" v-for="room of freeRooms"
+              @click="setCurrentRoom(room.roomName, room.floor)">
+            <div class="event-form__duration">
+              <time class="event-form__time">{{startTime}}</time>
+              –
+              <time class="event-form__time">{{endTime}}</time>
+            </div>
+            <span class="event-form__name">{{room.roomName}}</span>
+            &nbsp;•&nbsp;
+            <span class="event-form__floor">{{room.floor}} этаж</span>
+          </li>
         </ul>
+        <span class="event-form__error event-form__error--relative">
+          {{roomValidation}}
+        </span>
       </div>
       <div class="event-form__actions">
         <button class="event-form__btn event-form__btn--grey btn" type="button"
@@ -171,6 +189,7 @@
         isDateValid: false,
         isTimeValid: false,
         isMembersValid: false,
+        isRoomValid: false,
         id: 0,
         rooms: [
           {
@@ -219,6 +238,43 @@
                 isFull: false,
               },
             ],
+          },
+        ],
+        freeRooms: [
+          {
+            roomName: 'Ржавый Фред',
+            roomCount: '3 – 6 человек',
+            floor: 7,
+          },
+          {
+            roomName: 'Прачечная',
+            roomCount: 'до 10 человек',
+            floor: 7,
+          },
+          {
+            roomName: 'Желтый дом',
+            roomCount: 'до 10 человек',
+            floor: 7,
+          },
+          {
+            roomName: 'Оранжевый Тюльпан',
+            roomCount: '3 – 6 человек',
+            floor: 7,
+          },
+          {
+            roomName: 'Джокер',
+            roomCount: '3 – 6 человек',
+            floor: 6,
+          },
+          {
+            roomName: 'Мариванна',
+            roomCount: 'до 10 человек',
+            floor: 6,
+          },
+          {
+            roomName: 'Тонкий Боб',
+            roomCount: 'до 10 человек',
+            floor: 6,
           },
         ],
       };
@@ -364,11 +420,28 @@
         this.isMembersValid = true;
         return '';
       },
+      roomValidation() {
+        if (!this.getCurrentRoom || !this.getCurrentFloor) {
+          this.isRoomValid = false;
+          return 'Нужно выбрать переговорку';
+        }
+        this.isRoomValid = true;
+        return '';
+      },
       isFormValid() {
-        return this.isThemeValid && this.isDateValid && this.isTimeValid && this.isMembersValid;
+      // eslint-disable-next-line max-len
+        return this.isThemeValid && this.isDateValid && this.isTimeValid && this.isMembersValid && this.isRoomValid;
       },
     },
     methods: {
+      setCurrentRoom(roomName, floor) {
+        this.$store.commit('setCurrentRoom', roomName);
+        this.$store.commit('setCurrentFloor', floor);
+      },
+      removeCurrentRoom() {
+        this.$store.commit('setCurrentRoom', null);
+        this.$store.commit('setCurrentFloor', null);
+      },
       setEventDeleteModal() {
         this.$store.commit('setEventDeleteModal', true);
       },
@@ -560,6 +633,10 @@
       border-radius: 100px;
       font-size: 0;
 
+      &--margin {
+        margin-left: auto;
+      }
+
       &:hover,
       &:focus {
         background-color: #f2f3f4;
@@ -585,6 +662,11 @@
       font-family: HelveticaNeue, Helvetica, Arial, sans-serif;
       font-weight: 700;
       font-size: 10px;
+
+      &--relative {
+        position: relative;
+        top: 0;
+      }
 
       &--bottom {
         top: 140px;
@@ -754,6 +836,7 @@
       display: flex;
       align-items: baseline;
       padding: 12px 14px;
+      cursor: pointer;
       background-color: #e9ecef;
       border-radius: 4px;
       margin-bottom: 8px;
@@ -879,6 +962,11 @@
 
         &--width {
           width: 210px;
+        }
+
+        &--relative {
+          position: relative;
+          top: 0;
         }
       }
 
