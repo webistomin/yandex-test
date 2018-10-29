@@ -79,6 +79,11 @@ https://yandex-rooms.firebaseapp.com
 | --------- | --------- | --------- | --------- |--------- | --------- |
 | IE11, Edge|Последние 2 версии|Последние 2 версии| 9+ |Последние 2 версии| Последние 2 версии |
 
+## Таски на будущее
+- [ ] Покрыть тестами
+- [ ] Добавить сохранение переговорок в localStorage или любое другое хранилище
+- [ ] Разработать алгоритм выдачи свободных переговорок
+
 [travis-image]: https://travis-ci.org/webistomin/yandex-test.svg?branch=master
 [travis-url]: https://travis-ci.org/webistomin/yandex-test
 [dependency-image]: https://david-dm.org/webistomin/yandex-test/dev-status.svg

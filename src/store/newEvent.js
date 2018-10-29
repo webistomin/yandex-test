@@ -2,6 +2,7 @@ import Vue from 'vue';
 
 export default {
   state: {
+    id: 0,
     currentRoom: null,
     startTime: null,
     endTime: null,
@@ -54,6 +55,9 @@ export default {
     ],
   },
   mutations: {
+    setId(state, payload) {
+      state.id += payload;
+    },
     setCurrentRoom(state, payload) {
       state.currentRoom = payload;
     },
@@ -87,6 +91,9 @@ export default {
   },
   actions: {},
   getters: {
+    getId(state) {
+      return state.id;
+    },
     getCurrentRoom(state) {
       return state.currentRoom;
     },

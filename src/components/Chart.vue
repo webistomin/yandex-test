@@ -120,7 +120,9 @@
         this.isScrolled = e.target.scrollLeft >= 250;
       },
       openNewEventModal(event) {
+        this.$store.commit('setCurrentEvent', null);
         this.$store.commit('setNewEventModal', true);
+        this.$store.commit('setEventModal', false);
         this.$store.commit('setCurrentTheme', null);
         this.$store.commit('clearSelectedMembers');
         this.$store.commit('setCurrentRoom', event.target.dataset.room);
@@ -161,6 +163,7 @@
           this.$store.commit('setEventModal', false);
           this.clicked = [];
           this.$set(this.clicked, index, !this.clicked[index]);
+          this.$store.commit('setCurrentEvent', null);
         } else {
           this.currentTarget = event.target;
           this.$store.commit('setEventModal', true);

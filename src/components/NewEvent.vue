@@ -198,7 +198,6 @@
         isTimeValid: false,
         isMembersValid: false,
         isRoomValid: false,
-        id: 0,
         rooms: [
           {
             id: 7,
@@ -294,6 +293,9 @@
       }
     },
     computed: {
+      getId() {
+        return this.$store.getters.getId;
+      },
       getEditIndex() {
         return this.$store.getters.getEditIndex;
       },
@@ -403,23 +405,28 @@
         } else if (!reg.test(this.startTime) || !reg.test(this.endTime)) {
           this.isTimeValid = false;
           return 'Введите время в формате ЧЧ:ММ';
+        } else if (eventsList.length === 1 && eventsList[0] === this.$store.getters.getCurrentEvent) {
+          this.isTimeValid = true;
+          return '';
         } else if (eventsList.length > 0) {
-          return eventsList.map((obj) => {
-            if (obj.room === room && obj.date === date) {
-              if (startTime >= obj.startTime && startTime <= obj.endTime) {
-                this.isTimeValid = false;
-                return `Переговорка занята c ${obj.startTime} до ${obj.endTime}`;
-              } else if (endTime >= obj.startTime && endTime <= obj.endTime) {
-                this.isTimeValid = false;
-                return `Переговорка занята c ${obj.startTime} до ${obj.endTime}`;
-              } else if (startTime <= obj.startTime && endTime >= obj.endTime) {
-                this.isTimeValid = false;
-                return `Переговорка занята c ${obj.startTime} до ${obj.endTime}`;
+          return eventsList
+            .filter(obj => obj !== this.$store.getters.getCurrentEvent)
+            .map((obj) => {
+              if (obj.room === room && obj.date === date) {
+                if (startTime >= obj.startTime && startTime <= obj.endTime) {
+                  this.isTimeValid = false;
+                  return `Переговорка занята c ${obj.startTime} до ${obj.endTime}`;
+                } else if (endTime >= obj.startTime && endTime <= obj.endTime) {
+                  this.isTimeValid = false;
+                  return `Переговорка занята c ${obj.startTime} до ${obj.endTime}`;
+                } else if (startTime <= obj.startTime && endTime >= obj.endTime) {
+                  this.isTimeValid = false;
+                  return `Переговорка занята c ${obj.startTime} до ${obj.endTime}`;
+                }
               }
-            }
-            this.isTimeValid = true;
-            return '';
-          });
+              this.isTimeValid = true;
+              return '';
+            });
         }
         this.isTimeValid = true;
         return '';
@@ -493,6 +500,7 @@
         this.$store.commit('setNewEventModal', false);
         this.$store.commit('setEdit', false);
         this.$store.commit('setEditIndex', null);
+        this.$store.commit('setCurrentEvent', null);
         this.selectedMembers = [];
       },
       setSelectedMembers(value) {
@@ -532,7 +540,7 @@
           this.$store.commit('setCurrentEvent', eventObj);
         } else {
           const eventObj = {
-            id: this.id,
+            id: this.getId,
             floor: this.getCurrentFloor,
             room: this.getCurrentRoom,
             theme: this.currentTheme,
@@ -544,7 +552,7 @@
           this.$store.commit('setNewEvent', eventObj);
           this.$store.commit('setNewEventModal', false);
           this.$store.commit('setEventCreatedModal', true);
-          this.id += 1;
+          this.$store.commit('setId', 1);
           this.selectedMembers = [];
         }
       },
