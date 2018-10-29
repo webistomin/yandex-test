@@ -74,7 +74,7 @@
                    @keypress="endTimeKeyPressed($event)">
           </div>
           <span class="event-form__error event-form__error--bottom">
-          {{timeValidation}}
+          {{timeValidation | formatMessage}}
           </span>
         </div>
       </div>
@@ -379,6 +379,11 @@
       },
       timeValidation() {
         const reg = /([01]?[0-9]|2[0-3]):[0-5][0-9]/;
+        const date = moment(this.$store.getters.getSelectedDate).format('YYYY-MM-DD');
+        const eventsList = this.$store.getters.getEventsList;
+        const room = this.getCurrentRoom;
+        const startTime = this.getStartTime;
+        const endTime = this.getEndTime;
         if (this.endTime <= this.startTime) {
           this.isTimeValid = false;
           return 'Начало должно быть раньше конца';
@@ -394,6 +399,23 @@
         } else if (!reg.test(this.startTime) || !reg.test(this.endTime)) {
           this.isTimeValid = false;
           return 'Введите время в формате ЧЧ:ММ';
+        } else if (eventsList.length > 0) {
+          return eventsList.map((obj) => {
+            if (obj.room === room && obj.date === date) {
+              if (startTime >= obj.startTime && startTime <= obj.endTime) {
+                this.isTimeValid = false;
+                return `Переговорка занята c ${obj.startTime} до ${obj.endTime}`;
+              } else if (endTime >= obj.startTime && endTime <= obj.endTime) {
+                this.isTimeValid = false;
+                return `Переговорка занята c ${obj.startTime} до ${obj.endTime}`;
+              } else if (startTime <= obj.startTime && endTime >= obj.endTime) {
+                this.isTimeValid = false;
+                return `Переговорка занята c ${obj.startTime} до ${obj.endTime}`;
+              }
+            }
+            this.isTimeValid = true;
+            return '';
+          });
         }
         this.isTimeValid = true;
         return '';
@@ -521,6 +543,14 @@
           this.id += 1;
           this.selectedMembers = [];
         }
+      },
+    },
+    filters: {
+      formatMessage(value) {
+        if (typeof value === 'object') {
+          return String(value.filter(string => string.includes('Переговорка')));
+        }
+        return value;
       },
     },
     components: {
