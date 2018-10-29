@@ -22,7 +22,7 @@ export default {
     EventCreated,
   },
   mounted() {
-    setInterval(() => { this.$store.commit('setDate', new Date()); }, 1000 * 60);
+    setInterval(() => { this.$store.commit('setDate', new Date()); }, 1000);
   },
   computed: {
     getNewEventModal() {

@@ -601,7 +601,7 @@
   }
 
   .v-select .selected-tag {
-    display: none;
+    display: none !important;
   }
 
   .v-select .dropdown-toggle {
@@ -712,24 +712,24 @@
       top: 55px;
 
       & .cell.highlighted {
-        color: red;
-        background-color: transparent;
+        color: red !important;
+        background-color: transparent !important;
       }
 
       & .cell.selected,
       & .cell.selected.highlighted {
-        background-color: #0070E0;
-        color: #ffffff;
+        background-color: #0070E0 !important;
+        color: #ffffff !important;
 
         &:hover {
-          background-color: #0070E0;
-          color: #ffffff;
+          background-color: #0070E0 !important;
+          color: #ffffff !important;
         }
       }
 
       & .cell {
         &:hover {
-          color: #0070E0;
+          color: #0070E0 !important;
           border: 1px solid #0070E0 !important;
         }
       }
