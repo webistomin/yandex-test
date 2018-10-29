@@ -62,7 +62,7 @@
     }
 
     &__inner {
-      background-image: url("../../static/img/face.png");
+      background-image: url("../../static/img/gesturing-no.svg");
       background-repeat: no-repeat;
       background-position: center 25px;
       background-size: 50px 50px;
