@@ -4,7 +4,8 @@
     <div class="event__inner" v-if="getCurrentEvent != null">
       <div class="event__heading">
         <span class="event__title">{{getCurrentEvent.theme}}</span>
-        <button class="event__btn" @click="editSelectedEvent">Редактировать
+        <button class="event__btn" @click="editSelectedEvent"
+                title="Редактировать встречу">Редактировать
           <svg width="12" height="12" class="event__icon">
             <use x="0" y="0" xlink:href="#icon-pen"></use>
           </svg>

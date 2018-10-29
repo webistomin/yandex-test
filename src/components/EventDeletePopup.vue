@@ -6,12 +6,14 @@
       <div class="event-delete__actions">
         <button class="event-delete__btn btn"
                 type="button"
-                @click="setEventDeleteModal">
+                @click="setEventDeleteModal"
+                title="Отменить удаление">
           Отмена
         </button>
         <button class="event-delete__btn btn"
                 type="button"
-                @click="deleteCurrentEvent">
+                @click="deleteCurrentEvent"
+                title="Удалить встречу">
           Удалить
         </button>
       </div>

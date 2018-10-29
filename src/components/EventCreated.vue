@@ -18,7 +18,8 @@
       </div>
       <button class="event-created__btn btn"
               type="button"
-              @click="setEventCreatedModal">
+              @click="setEventCreatedModal"
+              title="Закрыть попап">
         Хорошо
       </button>
     </div>

@@ -19,7 +19,8 @@
                  :data-floor="room.floor"
                  v-for="(cell, index) of 17"
                  :key="index"
-                 @click="openNewEventModal($event)">
+                 @click="openNewEventModal($event)"
+                 title="Создать переговорку">
             </div>
             <div class="room__cell--taken"
                  v-for="(taken, index) of getEventsList"
@@ -28,7 +29,8 @@
                   width: getWidth(taken) + 'px',
                   left: getLeftPosition(taken) + 'px'
                  }"
-                 @click="showEventPopup($event, taken, index)">
+                 @click="showEventPopup($event, taken, index)"
+                 title="Показать информацию">
               <event v-if="clicked[index]"></event>
             </div>
           </div>

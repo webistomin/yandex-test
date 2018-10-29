@@ -8,6 +8,7 @@
       <button class="page-header__btn page-header__btn--hidden btn"
               type="button"
               @click="openNewEventModal"
+              title="Открыть попап"
       >Создать встречу</button>
     </div>
     <calendar></calendar>

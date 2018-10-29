@@ -13,7 +13,8 @@
       </span>
         <button class="event-form__button"
                 type="button"
-                @click="closeNewEventModal">Закрыть
+                @click="closeNewEventModal"
+                title="Закрыть попап">Закрыть
           <svg width="10" height="10" class="event-form__icon">
             <use x="0" y="0" xlink:href="#icon-cross"></use>
           </svg>
@@ -160,15 +161,18 @@
       </div>
       <div class="event-form__actions">
         <button class="event-form__btn event-form__btn--grey btn" type="button"
-                @click="closeNewEventModal">Отмена
+                @click="closeNewEventModal"
+                title="Закрыть попап">Отмена
         </button>
         <button class="event-form__btn btn" type="button" v-if="getEditState"
-                @click="setEventDeleteModal">
+                @click="setEventDeleteModal"
+                title="Удалить текущую встречу">
           Удалить встречу
         </button>
         <button class="event-form__btn btn" type="submit"
                 :class="{'event-form__btn--disabled': !isFormValid}"
-                :disabled="!isFormValid">
+                :disabled="!isFormValid"
+                title="Создать встречу">
           Создать встречу
         </button>
       </div>
@@ -920,7 +924,6 @@
       &--grey {
         background-color: #E9ECEF;
         color: #000000;
-        font-weight: 700;
 
         &:hover {
           background-color: #D5DFE9;

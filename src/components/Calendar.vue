@@ -1,12 +1,13 @@
 <template>
   <section class="calendar">
     <button class="calendar__btn calendar__btn--previous"
-    @click="removeOneDay">Назад
+            @click="removeOneDay"
+            title="Предыдущий день">Назад
       <svg width="10" height="10" class="calendar__icon">
         <use x="0" y="0" xlink:href="#icon-arrow"></use>
       </svg>
     </button>
-    <time class="calendar__date">
+    <time class="calendar__date" title="Выберите дату">
       <datepicker :language="language"
                   v-model="now"
                   :monday-first="true"
@@ -21,7 +22,8 @@
       </datepicker>
     </time>
     <button class="calendar__btn calendar__btn--next"
-            @click="addOneDay">Вперед
+            @click="addOneDay"
+            title="Следующий день">Вперед
       <svg width="10" height="10" class="calendar__icon">
         <use x="0" y="0" xlink:href="#icon-arrow"></use>
       </svg>
