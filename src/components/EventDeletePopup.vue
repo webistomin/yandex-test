@@ -4,7 +4,7 @@
     <div class="event-delete__inner">
       <span class="event-delete__title">Встреча будет удалена безвозвратно</span>
       <div class="event-delete__actions">
-        <button class="event-delete__btn btn"
+        <button class="event-delete__btn event-delete__btn--margin btn"
                 type="button"
                 @click="setEventDeleteModal"
                 title="Отменить удаление">

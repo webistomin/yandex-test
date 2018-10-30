@@ -501,6 +501,7 @@
         this.$store.commit('setEdit', false);
         this.$store.commit('setEditIndex', null);
         this.$store.commit('setCurrentEvent', null);
+        this.$store.commit('setEventModal', false);
         this.selectedMembers = [];
       },
       setSelectedMembers(value) {
@@ -1055,6 +1056,12 @@
 
       &__inner {
         margin-top: 0;
+      }
+
+      &__room {
+        box-sizing: border-box;
+        min-height: 38px;
+        padding: 8px 14px;
       }
     }
 

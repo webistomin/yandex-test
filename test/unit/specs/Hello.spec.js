@@ -1,11 +1,9 @@
 import Vue from 'vue';
-import Hello from '@/components/Hello';
+import NewEvent from '../../../src/components/NewEvent';
 
-describe('Hello.vue', () => {
-  it('should render correct contents', () => {
-    const Constructor = Vue.extend(Hello);
-    const vm = new Constructor().$mount();
-    expect(vm.$el.querySelector('.hello h1').textContent)
-      .to.equal('Welcome to Your Vue.js PWA');
+describe('NewEvent.vue', () => {
+  it('has a mounted hook', () => {
+    expect(typeof NewEvent.mounted)
+      .to.equal('function');
   });
 });
