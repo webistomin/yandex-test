@@ -198,6 +198,7 @@
 
       &__datepicker {
         max-width: 130px;
+        letter-spacing: -0.02em;
       }
 
       &__calendar {
